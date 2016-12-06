@@ -1,0 +1,1748 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>symantec_package.lib.allServices package &#8212; Symantec VIP Python  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Symantec VIP Python  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="symantec-package-lib-allservices-package">
+<h1>symantec_package.lib.allServices package<a class="headerlink" href="#symantec-package-lib-allservices-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-symantec_package.lib.allServices.SymantecServices">
+<span id="symantec-package-lib-allservices-symantecservices-module"></span><h2>symantec_package.lib.allServices.SymantecServices module<a class="headerlink" href="#module-symantec_package.lib.allServices.SymantecServices" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-SymantecManagementService"></span><dl class="class">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices">
+<em class="property">class </em><code class="descclassname">symantec_package.lib.allServices.SymantecServices.</code><code class="descname">SymantecServices</code><span class="sig-paren">(</span><em>queryClient</em>, <em>managementClient</em>, <em>userClient</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="class">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices">
+<em class="property">class </em><code class="descname">SymantecManagementServices</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class acts as a layer of abstraction to handling all management Symantec VIP SOAP calls in Python.</p>
+<p>You call this class to handle anything that is related to managing users and credentials.</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;http://../vipuserservices-mgmt-1.7.wsdl&quot;</span><span class="p">,</span> <span class="n">transport</span> <span class="o">=</span> <span class="n">HTTPSClientCertTransport</span><span class="p">(</span><span class="s1">&#39;vip_certificate.crt&#39;</span><span class="p">,</span><span class="s1">&#39;vip_certificate.crt&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">service</span> <span class="o">=</span> <span class="n">SymantecManagementServices</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">sendOtpSMS</span><span class="p">(</span><span class="o">&lt;</span><span class="n">parameters</span> <span class="n">here</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Reference HTTPHandler for further information on how to setup the client.</p>
+</div>
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.addCredentialOtp">
+<code class="descname">addCredentialOtp</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>credentialId</em>, <em>credentialType</em>, <em>otp1</em>, <em>otp2=None</em>, <em>friendlyName=None</em>, <em>trustedCredentialDevice=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.addCredentialOtp" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Assigns a credential to a user in VIP User Services using one time password(s)</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first"><em>MANDATORY</em> - SMS, voice, and system-generated credentials need to be registered first; Also, you have choice of setting the binding status to Enabled or Disabled upon adding credential to user.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>credentialId</strong> (<em>string</em>) &#8211; Unique identifier of the credential</li>
+<li><strong>credentialType</strong> (<em>string</em>) &#8211; Identifies the credential type: <strong>STANDARD_OTP</strong> (hardware or software VIP credential, including VIP Access for mobile), <strong>CERTIFICATE</strong> , <strong>SMS_OTP</strong> , <strong>VOICE_OTP</strong> , <strong>SERVICE_OTP</strong></li>
+<li><strong>otp1</strong> (<em>string</em>) &#8211; The first one time security code that is generated by the user&#8217;s credential.</li>
+<li><strong>otp2</strong> (<em>string</em>) &#8211; The second one time security code that is generated by the user&#8217;s credential.</li>
+<li><strong>friendlyName</strong> (<em>string</em>) &#8211; A user-defined name to identify the credential.</li>
+<li><strong>trustedCredentialDevice</strong> (<em>boolean</em>) &#8211; Allows the device to be remembered in the credential for future easy usage</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.addCredentialTrustedDevice">
+<code class="descname">addCredentialTrustedDevice</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>credentialId</em>, <em>credentialType</em>, <em>trustedDevice</em>, <em>friendlyName=None</em>, <em>trustedCredentialDevice=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.addCredentialTrustedDevice" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Assigns a credential to a user in VIP User Services by setting the device to be remembered</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first"><em>MANDATORY</em> - SMS, voice, and system-generated credentials need to be registered first</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>credentialId</strong> (<em>string</em>) &#8211; Unique identifier of the credential</li>
+<li><strong>credentialType</strong> (<em>string</em>) &#8211; Identifies the credential type: <strong>STANDARD_OTP</strong> (hardware or software VIP credential, including VIP Access for mobile), <strong>CERTIFICATE</strong> , <strong>SMS_OTP</strong> , <strong>VOICE_OTP</strong> , <strong>SERVICE_OTP</strong></li>
+<li><strong>trustedDevice</strong> (<em>boolean</em>) &#8211; Allows the device to be remembered in the credential for future easy usage</li>
+<li><strong>friendlyName</strong> (<em>string</em>) &#8211; A user-defined name to identify the credential.</li>
+<li><strong>trustedCredentialDevice</strong> (<em>boolean</em>) &#8211; Allows the device to be remembered in the credential for future easy usage</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.clearTemporaryPassword">
+<code class="descname">clearTemporaryPassword</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.clearTemporaryPassword" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Removes a temporary security code from a user</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">If the user attempts to use a temporary security that has been cleared, an error will be returned from VIP User Services stating security code is not set.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.clearUserPin">
+<code class="descname">clearUserPin</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.clearUserPin" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Removes an assigned PIN from an user</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">If the user attempts to use a PIN that has already been cleared, or has not been enabled by the user PIN policy, VIP User Services will return an error.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.createUser">
+<code class="descname">createUser</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em>, <em>pin=None</em>, <em>forcePinChange=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.createUser" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Adds a user to VIP User Services</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">By default users are created as Enabled. To disable use updateUser().</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+<li><strong>pin</strong> (<em>string</em>) &#8211; Optional user PIN for 1st factor authentication. 4 to 128 characters max, depending on PIN policy restrictions.</li>
+<li><strong>forcePinChange</strong> (<em>boolean</em>) &#8211; Force the PIN to expire after first use.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.deleteUser">
+<code class="descname">deleteUser</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.deleteUser" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Delete/remove a user from VIP User Services</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">Deleting a user is a cascading operation: when deleted, all credentials associated with user are removed and if credential is not associated with any other user, it is also deactivated.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getFieldContent">
+<code class="descname">getFieldContent</code><span class="sig-paren">(</span><em>fieldname</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getFieldContent" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Get content of items in response message</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">Works only for one line item</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fieldname</strong> (<em>string</em>) &#8211; Item name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The content of input fieldname</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getPreviousResponseFirstPairs">
+<code class="descname">getPreviousResponseFirstPairs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getPreviousResponseFirstPairs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from previous VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This will not work if there was no previous call in the client.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; Containing all the first pair values of each tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getPreviousResponseValue">
+<code class="descname">getPreviousResponseValue</code><span class="sig-paren">(</span><em>firstPair</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getPreviousResponseValue" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This will not work if there was no previous call in the client.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>firstPair</strong> (<em>string</em>) &#8211; The first pair in the tuple field</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The field value at the pair key</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getResponseFirstPairs">
+<code class="descname">getResponseFirstPairs</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getResponseFirstPairs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This requires the SOAP response as a parameter.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>response</strong> (<em>list of tuples</em>) &#8211; The SOAP response</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; Containing all the first pair values of each tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getResponseValue">
+<code class="descname">getResponseValue</code><span class="sig-paren">(</span><em>response</em>, <em>firstPair</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.getResponseValue" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">This requires the SOAP response as a parameter.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>response</strong> (<em>list of tuples</em>) &#8211; The SOAP response</li>
+<li><strong>firstPair</strong> (<em>string</em>) &#8211; The first pair in the tuple field</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The field value at the pair key</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.registerBySMS">
+<code class="descname">registerBySMS</code><span class="sig-paren">(</span><em>requestId</em>, <em>phoneNumber</em>, <em>smsFrom=None</em>, <em>messageTemplate=None</em>, <em>gatewayId=None</em>, <em>gatewayPassword=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.registerBySMS" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Registers the mobile phone credential for usage through SMS</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">SMS, voice, and system-generated credentials need to be registered first</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>phoneNumber</strong> (<em>string</em>) &#8211; The phone number credential tied to user (active) for delivering security code. It must range from 5 to 20 digits. Any appended extension must begin with lower-case &#8216;x&#8217;, followed by any combination of the characters: <em>.,# and digits 0 to 9. |  example: 488555444x,1112 | **comma*</em> Creates a short delay of approximately 2 seconds. | <strong>period</strong> Creates a longer delay of approximately 5 seconds. | <strong>star</strong> Used by some phone systems to access an extension. | <strong>pound or hash</strong> Used by some phone systems to access an extension.</li>
+<li><strong>smsFrom</strong> (<em>string</em>) &#8211; <em>DEPRECATED</em> - Specifies the FROM number that is used to send an SMS message so that the message from receiver can be mapped back.</li>
+<li><strong>messageTemplate</strong> (<em>string ???</em>) &#8211; The text that is sent to the user&#8217;s SMS device along with security code.</li>
+<li><strong>gatewayId</strong> (<em>string</em>) &#8211; The user&#8217;s specified gateway Account Id</li>
+<li><strong>gatewayPassword</strong> (<em>string</em>) &#8211; The user&#8217;s specified gateway Account password</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.registerByServiceOtp">
+<code class="descname">registerByServiceOtp</code><span class="sig-paren">(</span><em>requestId</em>, <em>serviceOtpId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.registerByServiceOtp" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Registers the phone credential for usage through a service one time password</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">DEPRECATED!! SMS, voice, and system-generated credentials need to be registered first</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>serviceOtpId</strong> (<em>string</em>) &#8211; The id of the service&#8217;s Otp</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.registerByVoice">
+<code class="descname">registerByVoice</code><span class="sig-paren">(</span><em>requestId</em>, <em>phoneNumber</em>, <em>language=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.registerByVoice" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Registers the phone credential for usage through voice message</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">SMS, voice, and system-generated credentials need to be registered first</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>phoneNumber</strong> (<em>string</em>) &#8211; The phone number credential tied to user (active) for delivering security code. It must range from 5 to 20 digits. Any appended extension must begin with lower-case &#8216;x&#8217;, followed by any combination of the characters: <em>.,# and digits 0 to 9. |  example: 488555444x,1112 | **comma*</em> Creates a short delay of approximately 2 seconds. | <strong>period</strong> Creates a longer delay of approximately 5 seconds. | <strong>star</strong> Used by some phone systems to access an extension. | <strong>pound or hash</strong> Used by some phone systems to access an extension.</li>
+<li><strong>language</strong> (<em>string</em>) &#8211; The language that the security code message is in. Only supported language is en-us</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.removeCredential">
+<code class="descname">removeCredential</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>credentialId</em>, <em>credentialType</em>, <em>trustedDevice=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.removeCredential" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Removes a credential from a user</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">If the credential is not associated with any other user, the credential is also deactivated. Also, if the device deletion policy for Remembered Devices is set to Admin Only, credentials can only be removed through VIP Manager (ERROR code: 6010).</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>credentialId</strong> (<em>string</em>) &#8211; Unique identifier of the credential</li>
+<li><strong>credentialType</strong> (<em>string</em>) &#8211; Identifies the credential type: <strong>STANDARD_OTP</strong> (hardware or software VIP credential, including VIP Access for mobile), <strong>CERTIFICATE</strong> , <strong>SMS_OTP</strong> , <strong>VOICE_OTP</strong> , <strong>SERVICE_OTP</strong></li>
+<li><strong>trustedDevice</strong> (<em>boolean</em>) &#8211; Allows the device to be remembered in the credential for future easy usage</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.sendOtpSMS">
+<code class="descname">sendOtpSMS</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>phoneNumber</em>, <em>isGatewayAcctInfo=False</em>, <em>onBehalfOfAccountId=None</em>, <em>smsFrom=None</em>, <em>messageTemplate=None</em>, <em>gatewayId=None</em>, <em>gatewayPassword=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.sendOtpSMS" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Sends a one time password to a mobile phone</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>phoneNumber</strong> (<em>string</em>) &#8211; The phone number credential tied to user (active) for delivering security code. It must range from 5 to 20 digits. Any appended extension must begin with lower-case &#8216;x&#8217;, followed by any combination of the characters: <em>.,# and digits 0 to 9. |  example: 488555444x,1112 | **comma*</em> Creates a short delay of approximately 2 seconds. | <strong>period</strong> Creates a longer delay of approximately 5 seconds. | <strong>star</strong> Used by some phone systems to access an extension. | <strong>pound or hash</strong> Used by some phone systems to access an extension.</li>
+<li><strong>isGatewayAcctInfo</strong> (<em>boolean</em>) &#8211; Should we use a gateway?</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+<li><strong>smsFrom</strong> (<em>string</em>) &#8211; DEPRECATED - Specifies the FROM number that is used to send an SMS message so that the message from receiver can be mapped back.</li>
+<li><strong>messageTemplate</strong> (<em>string ???</em>) &#8211; The text that is sent to the user&#8217;s SMS device along with security code.</li>
+<li><strong>gatewayId</strong> (<em>string</em>) &#8211; The user&#8217;s specified gateway Account Id</li>
+<li><strong>gatewayPassword</strong> (<em>string</em>) &#8211; The user&#8217;s specified gateway Account password</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.setTemporaryPasswordAttributes">
+<code class="descname">setTemporaryPasswordAttributes</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>expirationTime=None</em>, <em>oneTimeUseOnly=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.setTemporaryPasswordAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Changes the expiration date for a temporary security code you previously set using the setTemporaryPassword()</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>expirationDate</strong> (<em>dateTime</em>) &#8211; The temporary security code expiration time (maximum of 30 days) using GMT time zone. If no date is provided, the default expiration period of 1 day is used to calculate the security code expiration.</li>
+<li><strong>oneTimeUseOnly</strong> (<em>boolean</em>) &#8211; If this field is set to &#8220;true&#8221;, the temporary security code expires after one use, or at the expiration date. The default value is &#8220;false&#8221;.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.setTemporaryPasswordSMSDelivery">
+<code class="descname">setTemporaryPasswordSMSDelivery</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>phoneNumber</em>, <em>smsFrom=None</em>, <em>messageTemplate=None</em>, <em>gatewayId=None</em>, <em>gatewayPassword=None</em>, <em>temporaryPassword=None</em>, <em>expirationDate=None</em>, <em>oneTimeUseOnly=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.setTemporaryPasswordSMSDelivery" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Sets a temporary security code for a user through SMS text message</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note_1:</th><td class="field-body"><p class="first">Can optionally set an expiration date for the security code, or set it for one-time use only. The request requires the user ID and optionally, the temporary security code string. If you do not provide a security code, VIP User Services automatically generates one for you.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Note_2:</th><td class="field-body"><p class="first">You can clear the security code with clearTemporaryPassword. Also, if a user is authenticated using a security code generated by a valid credential, VP User Services automatically clears the temporary security code.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>phoneNumber</strong> (<em>string</em>) &#8211; The phone number credential tied to user (active) for delivering security code. It must range from 5 to 20 digits. Any appended extension must begin with lower-case &#8216;x&#8217;, followed by any combination of the characters: <em>.,# and digits 0 to 9. |  example: 488555444x,1112 | **comma*</em> Creates a short delay of approximately 2 seconds. | <strong>period</strong> Creates a longer delay of approximately 5 seconds. | <strong>star</strong> Used by some phone systems to access an extension. | <strong>pound or hash</strong> Used by some phone systems to access an extension.</li>
+<li><strong>smsFrom</strong> (<em>string</em>) &#8211; DEPRECATED - Specifies the FROM number that is used to send an SMS message so that the message from receiver can be mapped back.</li>
+<li><strong>messageTemplate</strong> (<em>string ???</em>) &#8211; The text that is sent to the user&#8217;s SMS device along with security code.</li>
+<li><strong>gatewayId</strong> (<em>string</em>) &#8211; The user&#8217;s specified gateway Account Id</li>
+<li><strong>gatewayPassword</strong> (<em>string</em>) &#8211; The user&#8217;s specified gateway Account password</li>
+<li><strong>temporaryPassword</strong> (<em>string</em>) &#8211; Temporary security code is either empty or 6 numeric characters. If this field is left empty, a security code will be auto-generated for the user.</li>
+<li><strong>expirationDate</strong> (<em>dateTime</em>) &#8211; The temporary security code expiration time (maximum of 30 days) using GMT time zone. If no date is provided, the default expiration period of 1 day is used to calculate the security code expiration.</li>
+<li><strong>oneTimeUseOnly</strong> (<em>boolean</em>) &#8211; If this field is set to &#8220;true&#8221;, the temporary security code expires after one use, or at the expiration date. The default value is &#8220;false&#8221;.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.setTemporaryPasswordVoiceDelivery">
+<code class="descname">setTemporaryPasswordVoiceDelivery</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>phoneNumber</em>, <em>language=None</em>, <em>temporaryPassword=None</em>, <em>expirationDate=None</em>, <em>oneTimeUseOnly=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.setTemporaryPasswordVoiceDelivery" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Sets a temporary security code for a user through SMS Voice message</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note_1:</th><td class="field-body"><p class="first">Can optionally set an expiration date for the security code, or set it for one-time use only. The request requires the user ID and optionally, the temporary security code string. If you do not provide a security code, VIP User Services automatically generates one for you.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Note_2:</th><td class="field-body"><p class="first">You can clear the security code with clearTemporaryPassword. Also, if a user is authenticated using a security code generated by a valid credential, VP User Services automatically clears the temporary security code.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>phoneNumber</strong> (<em>string</em>) &#8211; The phone number credential tied to user (active) for delivering security code. It must range from 5 to 20 digits. Any appended extension must begin with lower-case &#8216;x&#8217;, followed by any combination of the characters: <em>.,# and digits 0 to 9. |  example: 488555444x,1112 | **comma*</em> Creates a short delay of approximately 2 seconds. | <strong>period</strong> Creates a longer delay of approximately 5 seconds. | <strong>star</strong> Used by some phone systems to access an extension. | <strong>pound or hash</strong> Used by some phone systems to access an extension.</li>
+<li><strong>language</strong> (<em>string</em>) &#8211; The language that the security code message is in. Only supported language is en-us</li>
+<li><strong>temporaryPassword</strong> (<em>string</em>) &#8211; Temporary security code is either empty or 6 numeric characters. If this field is left empty, a security code will be auto-generated for the user.</li>
+<li><strong>expirationDate</strong> (<em>dateTime</em>) &#8211; The temporary security code expiration time (maximum of 30 days) using GMT time zone. If no date is provided, the default expiration period of 1 day is used to calculate the security code expiration.</li>
+<li><strong>oneTimeUseOnly</strong> (<em>boolean</em>) &#8211; If this field is set to &#8220;true&#8221;, the temporary security code expires after one use, or at the expiration date. The default value is &#8220;false&#8221;.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.updateCredential">
+<code class="descname">updateCredential</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>credentialId</em>, <em>credentialType</em>, <em>friendlyName</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.updateCredential" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Updates the friendly name of a credential</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">The updateCredential API includes unique identifiers of the request for the enterprise application, for the user, and for the credential.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>credentialId</strong> (<em>string</em>) &#8211; Unique identifier of the credential</li>
+<li><strong>credentialType</strong> (<em>string</em>) &#8211; Identifies the credential type: <strong>STANDARD_OTP</strong> (hardware or software VIP credential, including VIP Access for mobile), <strong>CERTIFICATE</strong> , <strong>SMS_OTP</strong> , <strong>VOICE_OTP</strong> , <strong>SERVICE_OTP</strong></li>
+<li><strong>friendlyName</strong> (<em>string</em>) &#8211; A user-defined name to identify the credential.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.updateUser">
+<code class="descname">updateUser</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>newUserId=None</em>, <em>newUserStatus=None</em>, <em>oldPin=None</em>, <em>newPin=None</em>, <em>forcePinChange=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecManagementServices.updateUser" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Update information about an user in VIP User Services</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">Also, enables or disables a user.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>newUserId</strong> (<em>string</em>) &#8211; Case-sensitive unique replacement ID for the user. If element isn&#8217;t provided, user ID is not changed.</li>
+<li><strong>newUserStatus</strong> (<em>string</em>) &#8211; New status of user: ACTIVE or DISABLED; If element is not provided, the user status is not changed.</li>
+<li><strong>oldPin</strong> (<em>string</em>) &#8211; The existing user PIN. If value is provided without a newPin value an error is returned. Else if the oldPin is not prvided, but a newPin value is provided, the user is updated with newPin.</li>
+<li><strong>newPin</strong> (<em>string</em>) &#8211; The new user PIN. If value does not meet requirements of the PIN policy, an error is returned. Else if the PIN policy has not been enabled for the user, an error is returned.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+<li><strong>forcePinChange</strong> (<em>boolean</em>) &#8211; Force the PIN to expire after first use.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices">
+<em class="property">class </em><code class="descclassname">SymantecServices.</code><code class="descname">SymantecQueryServices</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class acts as a layer of abstraction to handling all query Symantec VIP SOAP calls in Python.</p>
+<p>You call this class to handle anything that is related to user info and transaction status</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;http://../vipuserservices-query-1.7.wsdl&quot;</span><span class="p">,</span> <span class="n">transport</span> <span class="o">=</span> <span class="n">HTTPSClientCertTransport</span><span class="p">(</span><span class="s1">&#39;vip_certificate.crt&#39;</span><span class="p">,</span><span class="s1">&#39;vip_certificate.crt&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">service</span> <span class="o">=</span> <span class="n">SymantecQueryServices</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">getUserInfo</span><span class="p">(</span><span class="o">&lt;</span><span class="n">parameters</span> <span class="n">here</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Reference HTTPHandler for further information on how to setup the client.</p>
+</div>
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getCredentialInfo">
+<code class="descname">getCredentialInfo</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentialId</em>, <em>credentialType='STANDARD_OTP'</em>, <em>includePushAttributes=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getCredentialInfo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Get detail info of a registered credential</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A identifier ID of a call, may be useful for troubleshooting</li>
+<li><strong>credentialType</strong> (<em>string</em>) &#8211; Type of this credential</li>
+<li><strong>includePushAttributes</strong> (<em>string</em>) &#8211; Include push attributes in response message</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">CredentialId:</th><td class="field-body"><p class="first">A unique identifier for every credential</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the return SOAP response.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getFieldContent">
+<code class="descname">getFieldContent</code><span class="sig-paren">(</span><em>fieldname</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getFieldContent" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Get content of items in response message</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">Works only for one line item</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fieldname</strong> (<em>string</em>) &#8211; Item name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The content of input fieldname</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getPreviousResponseFirstPairs">
+<code class="descname">getPreviousResponseFirstPairs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getPreviousResponseFirstPairs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from previous VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This will not work if there was no previous call in the client.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; Containing all the first pair values of each tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getPreviousResponseValue">
+<code class="descname">getPreviousResponseValue</code><span class="sig-paren">(</span><em>firstPair</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getPreviousResponseValue" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This will not work if there was no previous call in the client.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>firstPair</strong> (<em>string</em>) &#8211; The first pair in the tuple field</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The field value at the pair key</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getResponseFirstPairs">
+<code class="descname">getResponseFirstPairs</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getResponseFirstPairs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This requires the SOAP response as a parameter.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>response</strong> (<em>list of tuples</em>) &#8211; The SOAP response</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; Containing all the first pair values of each tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getResponseValue">
+<code class="descname">getResponseValue</code><span class="sig-paren">(</span><em>response</em>, <em>firstPair</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getResponseValue" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">This requires the SOAP response as a parameter.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>response</strong> (<em>list of tuples</em>) &#8211; The SOAP response</li>
+<li><strong>firstPair</strong> (<em>string</em>) &#8211; The first pair in the tuple field</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The field value at the pair key</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getServerTime">
+<code class="descname">getServerTime</code><span class="sig-paren">(</span><em>requestId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getServerTime" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Get server time</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A identifier ID of a call, may be useful for troubleshooting</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the return SOAP response.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getTemporaryPasswordAttributes">
+<code class="descname">getTemporaryPasswordAttributes</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getTemporaryPasswordAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Get associated attributes of a temporary password</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A identifier ID of a call, may be useful for troubleshooting</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">UserId:</th><td class="field-body"><p class="first">Unique userid registered in VIP</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the return SOAP response.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getUserInfo">
+<code class="descname">getUserInfo</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em>, <em>iaInfo=True</em>, <em>includePushAttributes=True</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.getUserInfo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Get the account info of a VIP user</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A identifier ID of a call, may be useful for troubleshooting</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+<li><strong>iaInfo</strong> (<em>boolean</em>) &#8211; Includes iaInfo in response message</li>
+<li><strong>includesPushAttributes</strong> (<em>bollean</em>) &#8211; Includes push attributes in response message</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">UserId:</th><td class="field-body"><p class="first">Unique user id regisered on VIP</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the return SOAP response.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.pollPushStatus">
+<code class="descname">pollPushStatus</code><span class="sig-paren">(</span><em>requestId</em>, <em>transactionId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecQueryServices.pollPushStatus" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Poll status of a sent push notification</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">It is associate with a unique transaction ID</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A identifier ID of a call, may be useful for troubleshooting</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">TransactionId:</th><td class="field-body"><p class="first">A unique identifier for a push transaction</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the return SOAP response.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices">
+<em class="property">class </em><code class="descclassname">SymantecServices.</code><code class="descname">SymantecUserServices</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class acts as a layer of abstraction to handling all user services Symantec VIP SOAP calls in Python.</p>
+<p>You call this class to handle anything that is related to authenticating users and credentials.</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;http://../vipuserservices-auth-1.7.wsdl&quot;</span><span class="p">,</span> <span class="n">transport</span> <span class="o">=</span> <span class="n">HTTPSClientCertTransport</span><span class="p">(</span><span class="s1">&#39;vip_certificate.crt&#39;</span><span class="p">,</span><span class="s1">&#39;vip_certificate.crt&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">service</span> <span class="o">=</span> <span class="n">SymantecUserServices</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">authenticateUser</span><span class="p">(</span><span class="o">&lt;</span><span class="n">parameters</span> <span class="n">here</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Reference HTTPHandler for further information on how to setup the client.</p>
+</div>
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateCredentialWithPush">
+<code class="descname">authenticateCredentialWithPush</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentialId</em>, <em>activate=None</em>, <em>pushAuthData=None</em>, <em>key='authLevel.level'</em>, <em>value=None</em>, <em>authContext=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateCredentialWithPush" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Authenticates a user via a Push notification using their credential ID.</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>credentialId</strong> (<em>string</em>) &#8211; The unique identifier for the hardware credential being used. (Could be your phone, desktop, etc.)</li>
+<li><strong>activate</strong> (<em>boolean</em>) &#8211; Activates a credential. If otpAuthData is provided, it consumes the OTP to authenticate. If pushAuthData is used, sends a push notification to the credential for authentication.</li>
+<li><strong>authContext</strong> (<em>dict</em>) &#8211; A map containing the parameters that control how the authentication is performed. Example format: authContext={&#8220;params&#8221;:{&#8220;Key&#8221;:authLevel.level, &#8220;Value&#8221;:&lt;the authentication level described next&gt;}}. VIP User Services accepts an authentication level for the authContext field. The authentication level defines the credential types that can be validated with this request. This level must match an authentication level configured in VIP Manager. ■ Key: Enter authLevel.level ■ Value: Enter the authentication level value (as an integer from 1 - 10).</li>
+<li><strong>value</strong> (<em>string</em>) &#8211; The authentication level value (1-10)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateCredentialWithSMS">
+<code class="descname">authenticateCredentialWithSMS</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentialId_phoneNumber</em>, <em>otp1</em>, <em>otp2=None</em>, <em>activate=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateCredentialWithSMS" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Authenticates a user via an SMS code sent to their device using their credential ID and that OTP sent.</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>credentialId_phoneNumber</strong> (<em>string</em>) &#8211; The phone number of the device. Must be in ten-digit format without any dashes or delimiters (Example: 12345678900).</li>
+<li><strong>otp1</strong> (<em>string</em>) &#8211; The One Time Password generated by the user&#8217;s credential.</li>
+<li><strong>otp2</strong> (<em>string</em>) &#8211; (Optional) - A second OTP.</li>
+<li><strong>activate</strong> (<em>boolean</em>) &#8211; Activates a credential. If otpAuthData is provided, it consumes the OTP to authenticate. If pushAuthData is used, sends a push notification to the credential for authentication.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateCredentialWithStandard_OTP">
+<code class="descname">authenticateCredentialWithStandard_OTP</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentialId</em>, <em>otp1</em>, <em>otp2=None</em>, <em>activate=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateCredentialWithStandard_OTP" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Authenticates a user via the 6-digit OTP generated by their device on the Symantec VIP Access app.</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>credentialId</strong> (<em>string</em>) &#8211; The unique identifier for the hardware credential being used. (Could be your phone, desktop, etc.)</li>
+<li><strong>otp1</strong> (<em>string</em>) &#8211; The One Time Password generated by the user&#8217;s credential.</li>
+<li><strong>otp2</strong> (<em>string</em>) &#8211; (Optional) - A second OTP.</li>
+<li><strong>activate</strong> (<em>boolean</em>) &#8211; Activates a credential. If otpAuthData is provided, it consumes the OTP to authenticate. If pushAuthData is used, sends a push notification to the credential for authentication.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateCredentials">
+<code class="descname">authenticateCredentials</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentials</em>, <em>otp1=None</em>, <em>otp2=None</em>, <em>pushAuthData=None</em>, <em>activate=None</em>, <em>authContext=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateCredentials" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><a href="#id1"><span class="problematic" id="id2">*</span></a>Authenticates a credential with VIP Services. *</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">Must provide either OTP data OR push data (pushAuthData)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>credentials</strong> (<em>dict</em>) &#8211; Credential information in a dict in the following format {&#8220;credentialId&#8221;:&lt;some_id&gt; , &#8220;credentialType&#8221;:&lt;one of STANDARD_OTP or SMS_OTP&gt;}</li>
+<li><strong>otp1</strong> (<em>string</em>) &#8211; The One Time Password generated by the user&#8217;s credential.</li>
+<li><strong>otp2</strong> (<em>string</em>) &#8211; (Optional) - A second OTP.</li>
+<li><strong>activate</strong> (<em>boolean</em>) &#8211; Activates a credential. If otpAuthData is provided, it consumes the OTP to authenticate. If pushAuthData is used, sends a push notification to the credential for authentication.</li>
+<li><strong>authContext</strong> (<em>dict</em>) &#8211; A map containing the parameters that control how the authentication is performed. Example format: authContext={&#8220;params&#8221;:{&#8220;Key&#8221;:authLevel.level, &#8220;Value&#8221;:&lt;the authentication level described next&gt;}}. VIP User Services accepts an authentication level for the authContext field. The authentication level defines the credential types that can be validated with this request. This level must match an authentication level configured in VIP Manager. ■ Key: Enter authLevel.level ■ Value: Enter the authentication level value (as an integer from 1 - 10).</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateUser">
+<code class="descname">authenticateUser</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>otp1</em>, <em>otp2=None</em>, <em>value=None</em>, <em>key='authLevel.level'</em>, <em>authContext=None</em>, <em>pin=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateUser" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Authenticates a user by userID with Symantec VIP Services</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>otp1</strong> (<em>string</em>) &#8211; The One Time Password generated by the user&#8217;s credential.</li>
+<li><strong>otp2</strong> (<em>string</em>) &#8211; (Optional) - A second OTP.</li>
+<li><strong>value</strong> (<em>string</em>) &#8211; The authentication level value (1-10)</li>
+<li><strong>authContext</strong> (<em>string</em>) &#8211; A map containing the parameters that control how the authentication is performed. VIP User Services accepts an authentication level for the authContext field. The authentication level defines the credential types that can be validated with this request. This level must match an authentication level configured in VIP Manager. ■ Key: Enter authLevel.level ■ Value: Enter the authentication level value (as an integer from 1 - 10).</li>
+<li><strong>pin</strong> (<em>string</em>) &#8211; Optional user PIN for first-factor authentication. The PIN may be 4 to 128 international characters in length, depending on restrictions of the PIN policy.</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateUserWithPush">
+<code class="descname">authenticateUserWithPush</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>pin=None</em>, <em>pushAuthData=None</em>, <em>key='authLevel.level'</em>, <em>value=None</em>, <em>authContext=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.authenticateUserWithPush" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Authenticates a user via a Push notification using their user ID.</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; The unique userID stored in Symantec VIP Services.</li>
+<li><strong>pin</strong> (<em>string</em>) &#8211; Optional user PIN for first-factor authentication. The PIN may be 4 to 128 international characters in length, depending on restrictions of the PIN policy.</li>
+<li><strong>value</strong> (<em>string</em>) &#8211; The authentication level value (1-10)</li>
+<li><strong>authContext</strong> (<em>dict</em>) &#8211; A map containing the parameters that control how the authentication is performed. Example format: authContext={&#8220;params&#8221;:{&#8220;Key&#8221;:authLevel.level, &#8220;Value&#8221;:&lt;the authentication level described next&gt;}}. VIP User Services accepts an authentication level for the authContext field. The authentication level defines the credential types that can be validated with this request. This level must match an authentication level configured in VIP Manager. ■ Key: Enter authLevel.level ■ Value: Enter the authentication level value (as an integer from 1 - 10).</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.checkOtp">
+<code class="descname">checkOtp</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>otp1</em>, <em>otp2=None</em>, <em>value=None</em>, <em>key='authLevel.level'</em>, <em>authContext=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.checkOtp" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Authenticates a user via the OTP generated by their device in the VIP Access application using their user ID.</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; The unique userID stored in Symantec VIP Services.</li>
+<li><strong>otp1</strong> (<em>string</em>) &#8211; The One Time Password generated by the user&#8217;s credential.</li>
+<li><strong>otp2</strong> (<em>string</em>) &#8211; (Optional) - A second OTP.</li>
+<li><strong>value</strong> (<em>string</em>) &#8211; The authentication level value (1-10)</li>
+<li><strong>authContext</strong> (<em>dict</em>) &#8211; A map containing the parameters that control how the authentication is performed. Example format: authContext={&#8220;params&#8221;:{&#8220;Key&#8221;:authLevel.level, &#8220;Value&#8221;:&lt;the authentication level described next&gt;}}. VIP User Services accepts an authentication level for the authContext field. The authentication level defines the credential types that can be validated with this request. This level must match an authentication level configured in VIP Manager. ■ Key: Enter authLevel.level ■ Value: Enter the authentication level value (as an integer from 1 - 10).</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.confirmRisk">
+<code class="descname">confirmRisk</code><span class="sig-paren">(</span><em>requestId</em>, <em>UserId</em>, <em>EventId</em>, <em>VerifyMethod=None</em>, <em>KeyValuePair=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.confirmRisk" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>For VIP Intelligent Authentication, you need to apply the confirmRisk API if the evaluateRisk API determined a sign-in event was risky, and the site&#8217;s user challenge response also failed.</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>UserId</strong> (<em>string</em>) &#8211; Unique ID for the user (for example, the user email address, the user&#8217;s login name, or a unique ID that maps to user&#8217;s login name). The userId accepts 1 to 128 international characters. The user ID is not case-sensitive in look-up operations.</li>
+<li><strong>EventId</strong> (<em>string</em>) &#8211; The ID of the current event generated by IA.</li>
+<li><strong>VerifyMethod</strong> (<em>string</em>) &#8211; Method that is used to challenge a risky sign-in event, from 1 to 64 characters.</li>
+<li><strong>KeyValuePair</strong> (<em>list</em>) &#8211; List of key values pairs</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.convert_to_hash">
+<code class="descname">convert_to_hash</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.convert_to_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert Suds object into serializable format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.denyRisk">
+<code class="descname">denyRisk</code><span class="sig-paren">(</span><em>requestId</em>, <em>UserId</em>, <em>EventId</em>, <em>VerifyMethod=None</em>, <em>IAAuthData=None</em>, <em>isRememberDevice=None</em>, <em>FriendlyName=None</em>, <em>KeyValuePair=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.denyRisk" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>For VIP Intelligent Authentication, you need to apply the confirmRisk API if the evaluateRisk API determined a sign-in event was risky, and the site&#8217;s user challenge response also failed.</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>UserId</strong> (<em>string</em>) &#8211; Unique ID for the user (for example, the user email address, the user&#8217;s login name, or a unique ID that maps to user&#8217;s login name). The userId accepts 1 to 128 international characters. The user ID is not case-sensitive in look-up operations.</li>
+<li><strong>EventId</strong> (<em>string</em>) &#8211; The ID of the current event generated by IA.</li>
+<li><strong>VerifyMethod</strong> (<em>string</em>) &#8211; Method that is used to challenge a risky sign-in event, from 1 to 64 characters.</li>
+<li><strong>IAAuthData</strong> (<em>string</em>) &#8211; &#8220;Fingerprint&#8221; of the device, collected from browser.</li>
+<li><strong>isRememberDevice</strong> (<em>boolean</em>) &#8211; Sets &#8220;true&#8221; if the end user has chosen to always have device recognized. The device tag is then bound to the end user. If the end user elects not to have the device recognized, this value is &#8220;false.&#8221;</li>
+<li><strong>FriendlyName</strong> (<em>string</em>) &#8211; A descriptive name provided by the user during registration. If the user did not provide a name, a default friendly name is used.</li>
+<li><strong>KeyValuePair</strong> (<em>list</em>) &#8211; List of key values pairs</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.evaluateRisk">
+<code class="descname">evaluateRisk</code><span class="sig-paren">(</span><em>requestId</em>, <em>UserId</em>, <em>IpAddress</em>, <em>UserAgent</em>, <em>IAAuthData=None</em>, <em>KeyValuePair=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.evaluateRisk" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>You can use the evaluateRisk API to assess whether a particular sign-in event is considered risky. Note that this information only identifies the potential risk of a particular event; the enterprise should challenge the user for additional authentication to determine if the event is actually fraudulent.</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestId</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>UserId</strong> (<em>string</em>) &#8211; Unique ID for the user (for example, the user email address, the user&#8217;s login name, or a unique ID that maps to user&#8217;s login name). The userId accepts 1 to 128 international characters. The user ID is not case-sensitive in look-up operations.</li>
+<li><strong>IpAddress</strong> (<em>string</em>) &#8211; IP address in decimal format (for example, 209.191.122.70).</li>
+<li><strong>UserAgent</strong> (<em>string</em>) &#8211; Browser user agent. Should not exceed 250 characters.</li>
+<li><strong>IAAuthData</strong> (<em>string</em>) &#8211; &#8220;Fingerprint&#8221; of the device, collected from browser.</li>
+<li><strong>KeyValuePair</strong> (<em>list</em>) &#8211; List of key values pairs</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getFieldContent">
+<code class="descname">getFieldContent</code><span class="sig-paren">(</span><em>fieldname</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getFieldContent" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Get content of items in response message</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">Works only for one line item</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fieldname</strong> (<em>string</em>) &#8211; Item name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The content of input fieldname</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getPreviousResponseFirstPairs">
+<code class="descname">getPreviousResponseFirstPairs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getPreviousResponseFirstPairs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from previous VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This will not work if there was no previous call in the client.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; Containing all the first pair values of each tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getPreviousResponseValue">
+<code class="descname">getPreviousResponseValue</code><span class="sig-paren">(</span><em>firstPair</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getPreviousResponseValue" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This will not work if there was no previous call in the client.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>firstPair</strong> (<em>string</em>) &#8211; The first pair in the tuple field</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The field value at the pair key</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getResponseFirstPairs">
+<code class="descname">getResponseFirstPairs</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getResponseFirstPairs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This requires the SOAP response as a parameter.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>response</strong> (<em>list of tuples</em>) &#8211; The SOAP response</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; Containing all the first pair values of each tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getResponseValue">
+<code class="descname">getResponseValue</code><span class="sig-paren">(</span><em>response</em>, <em>firstPair</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.SymantecUserServices.getResponseValue" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">This requires the SOAP response as a parameter.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>response</strong> (<em>list of tuples</em>) &#8211; The SOAP response</li>
+<li><strong>firstPair</strong> (<em>string</em>) &#8211; The first pair in the tuple field</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The field value at the pair key</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.addCredentialOtp">
+<code class="descclassname">SymantecServices.</code><code class="descname">addCredentialOtp</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>credentialId</em>, <em>credentialType</em>, <em>otp1</em>, <em>otp2=None</em>, <em>friendlyName=None</em>, <em>trustedCredentialDevice=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.addCredentialOtp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.addCredentialTrustedDevice">
+<code class="descclassname">SymantecServices.</code><code class="descname">addCredentialTrustedDevice</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>credentialId</em>, <em>credentialType</em>, <em>trustedDevice</em>, <em>friendlyName=None</em>, <em>trustedCredentialDevice=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.addCredentialTrustedDevice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateCredentialWithPush">
+<code class="descclassname">SymantecServices.</code><code class="descname">authenticateCredentialWithPush</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentialId_phone</em>, <em>activate=None</em>, <em>pushAuthData=None</em>, <em>key='authLevel.level'</em>, <em>value=None</em>, <em>authContext=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateCredentialWithPush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateCredentialWithSMS">
+<code class="descclassname">SymantecServices.</code><code class="descname">authenticateCredentialWithSMS</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentialId_phoneNumber</em>, <em>otp1</em>, <em>otp2=None</em>, <em>activate=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateCredentialWithSMS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateCredentialWithStandard_OTP">
+<code class="descclassname">SymantecServices.</code><code class="descname">authenticateCredentialWithStandard_OTP</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentialId</em>, <em>otp1</em>, <em>otp2=None</em>, <em>activate=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateCredentialWithStandard_OTP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateCredentials">
+<code class="descclassname">SymantecServices.</code><code class="descname">authenticateCredentials</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentials</em>, <em>otp1=None</em>, <em>otp2=None</em>, <em>pushAuthData=None</em>, <em>activate=None</em>, <em>authContext=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateCredentials" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateUser">
+<code class="descclassname">SymantecServices.</code><code class="descname">authenticateUser</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>otp1</em>, <em>otp2=None</em>, <em>value=None</em>, <em>key='authLevel.level'</em>, <em>authContext=None</em>, <em>pin=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateUser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateUserWithPush">
+<code class="descclassname">SymantecServices.</code><code class="descname">authenticateUserWithPush</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>pin=None</em>, <em>pushAuthData=None</em>, <em>key='authLevel.level'</em>, <em>value=None</em>, <em>authContext=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateUserWithPush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateUserWithPushThenPolling">
+<code class="descclassname">SymantecServices.</code><code class="descname">authenticateUserWithPushThenPolling</code><span class="sig-paren">(</span><em>requestIdPush</em>, <em>requestIdPoll</em>, <em>userId</em>, <em>queryTimeout=60</em>, <em>queryInterval=5</em>, <em>displayParams=None</em>, <em>requestParams=None</em>, <em>authContext=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.authenticateUserWithPushThenPolling" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Uses both query and management clients as well as simple logic to provide a sample solution to authenicating a login quickly with pushing to mobile</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>requestIds</strong> (<em>string</em>) &#8211; A unique identifier of the request for the enterprise application. This may be useful for troubleshooting</li>
+<li><strong>userId</strong> (<em>string</em>) &#8211; Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.</li>
+<li><strong>queryTimeout</strong> (<em>int</em>) &#8211; The time in seconds on how long the function will poll for before timing out.</li>
+<li><strong>queryInterval</strong> (<em>int</em>) &#8211; The time in seconds on how frequent the function will send a poll request.</li>
+<li><strong>displayParams</strong> (<em>list</em>) &#8211; Passes and displays content to end users in the push notification. You can customize display messages up to 250 characters. However, some phones may not display complete messages. The following keys are currently supported: Note: This input field contains parameters that define the push notification that is sent to the user’s push-capable mobile device. - display.message.title: Title of themodal This value is used for standard push authentication requests. It is not applicable to biometric fingerprint or VIP PIN authentication on the mobile device. - display.message.text: Text of modal - display.message.profile: Indicates the login URL or profile.</li>
+<li><strong>requestParams</strong> (<em>list</em>) &#8211; The following keys are currently supported: request.timeout: numeric value that indicates the timeout period in seconds of the push authentication request that is sent to the user’s mobile devices.</li>
+<li><strong>authContext</strong> (<em>dict</em>) &#8211; A map containing the parameters that control how the authentication is performed. Example format: authContext={&#8220;params&#8221;:{&#8220;Key&#8221;:authLevel.level, &#8220;Value&#8221;:&lt;the authentication level described next&gt;}}. VIP User Services accepts an authentication level for the authContext field. The authentication level defines the credential types that can be validated with this request. This level must match an authentication level configured in VIP Manager. ■ Key: Enter authLevel.level ■ Value: Enter the authentication level value (as an integer from 1 - 10).</li>
+<li><strong>onBehalfOfAccountId</strong> (<em>string</em>) &#8211; The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the return SOAP response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.checkOtp">
+<code class="descclassname">SymantecServices.</code><code class="descname">checkOtp</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>otp1</em>, <em>otp2=None</em>, <em>value=None</em>, <em>key='authLevel.level'</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.checkOtp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.clearTemporaryPassword">
+<code class="descclassname">SymantecServices.</code><code class="descname">clearTemporaryPassword</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.clearTemporaryPassword" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.clearUserPin">
+<code class="descclassname">SymantecServices.</code><code class="descname">clearUserPin</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.clearUserPin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.confirmRisk">
+<code class="descclassname">SymantecServices.</code><code class="descname">confirmRisk</code><span class="sig-paren">(</span><em>requestId</em>, <em>UserId</em>, <em>EventId</em>, <em>VerifyMethod=None</em>, <em>KeyValuePair=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.confirmRisk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.createUser">
+<code class="descclassname">SymantecServices.</code><code class="descname">createUser</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em>, <em>pin=None</em>, <em>forcePinChange=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.createUser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.deleteUser">
+<code class="descclassname">SymantecServices.</code><code class="descname">deleteUser</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.deleteUser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.denyRisk">
+<code class="descclassname">SymantecServices.</code><code class="descname">denyRisk</code><span class="sig-paren">(</span><em>requestId</em>, <em>UserId</em>, <em>EventId</em>, <em>VerifyMethod=None</em>, <em>IAAuthData=None</em>, <em>isRememberDevice=None</em>, <em>FriendlyName=None</em>, <em>KeyValuePair=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.denyRisk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.evaluateRisk">
+<code class="descclassname">SymantecServices.</code><code class="descname">evaluateRisk</code><span class="sig-paren">(</span><em>requestId</em>, <em>UserId</em>, <em>IpAddress</em>, <em>UserAgent</em>, <em>IAAuthData=None</em>, <em>KeyValuePair=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.evaluateRisk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.getCredentialInfo">
+<code class="descclassname">SymantecServices.</code><code class="descname">getCredentialInfo</code><span class="sig-paren">(</span><em>requestId</em>, <em>credentialId</em>, <em>credentialType='STANDARD_OTP'</em>, <em>includePushAttributes=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.getCredentialInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.getFieldContent">
+<code class="descclassname">SymantecServices.</code><code class="descname">getFieldContent</code><span class="sig-paren">(</span><em>fieldname</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.getFieldContent" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Get content of items in response message</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">Works only for one line item</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fieldname</strong> (<em>string</em>) &#8211; Item name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The content of input fieldname</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.getPreviousResponseFirstPairs">
+<code class="descclassname">SymantecServices.</code><code class="descname">getPreviousResponseFirstPairs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.getPreviousResponseFirstPairs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from previous VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This will not work if there was no previous call in the client.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; Containing all the first pair values of each tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.getPreviousResponseValue">
+<code class="descclassname">SymantecServices.</code><code class="descname">getPreviousResponseValue</code><span class="sig-paren">(</span><em>firstPair</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.getPreviousResponseValue" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This will not work if there was no previous call in the client.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>firstPair</strong> (<em>string</em>) &#8211; The first pair in the tuple field</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The field value at the pair key</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.getResponseFirstPairs">
+<code class="descclassname">SymantecServices.</code><code class="descname">getResponseFirstPairs</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.getResponseFirstPairs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body">This requires the SOAP response as a parameter.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>response</strong> (<em>list of tuples</em>) &#8211; The SOAP response</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; Containing all the first pair values of each tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.getResponseValue">
+<code class="descclassname">SymantecServices.</code><code class="descname">getResponseValue</code><span class="sig-paren">(</span><em>response</em>, <em>firstPair</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.getResponseValue" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Description:</th><td class="field-body"><p class="first"><em>Gets the 1st level of important main response fields from the VIP SOAP call and tells what fields are accessible</em></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">This requires the SOAP response as a parameter.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>response</strong> (<em>list of tuples</em>) &#8211; The SOAP response</li>
+<li><strong>firstPair</strong> (<em>string</em>) &#8211; The first pair in the tuple field</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The field value at the pair key</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.getServerTime">
+<code class="descclassname">SymantecServices.</code><code class="descname">getServerTime</code><span class="sig-paren">(</span><em>requestId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.getServerTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.getTemporaryPasswordAttributes">
+<code class="descclassname">SymantecServices.</code><code class="descname">getTemporaryPasswordAttributes</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.getTemporaryPasswordAttributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.getUserInfo">
+<code class="descclassname">SymantecServices.</code><code class="descname">getUserInfo</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>onBehalfOfAccountId=None</em>, <em>iaInfo=True</em>, <em>includePushAttributes=True</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.getUserInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.pollPushStatus">
+<code class="descclassname">SymantecServices.</code><code class="descname">pollPushStatus</code><span class="sig-paren">(</span><em>requestId</em>, <em>transactionId</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.pollPushStatus" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.registerBySMS">
+<code class="descclassname">SymantecServices.</code><code class="descname">registerBySMS</code><span class="sig-paren">(</span><em>requestId</em>, <em>phoneNumber</em>, <em>smsFrom=None</em>, <em>messageTemplate=None</em>, <em>gatewayId=None</em>, <em>gatewayPassword=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.registerBySMS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.registerByServiceOtp">
+<code class="descclassname">SymantecServices.</code><code class="descname">registerByServiceOtp</code><span class="sig-paren">(</span><em>requestId</em>, <em>serviceOtpId</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.registerByServiceOtp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.registerByVoice">
+<code class="descclassname">SymantecServices.</code><code class="descname">registerByVoice</code><span class="sig-paren">(</span><em>requestId</em>, <em>phoneNumber</em>, <em>language=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.registerByVoice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.removeCredential">
+<code class="descclassname">SymantecServices.</code><code class="descname">removeCredential</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>credentialId</em>, <em>credentialType</em>, <em>trustedDevice=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.removeCredential" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.sendOtpSMS">
+<code class="descclassname">SymantecServices.</code><code class="descname">sendOtpSMS</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>phoneNumber</em>, <em>isGatewayAcctInfo=False</em>, <em>onBehalfOfAccountId=None</em>, <em>smsFrom=None</em>, <em>messageTemplate=None</em>, <em>gatewayId=None</em>, <em>gatewayPassword=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.sendOtpSMS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.setTemporaryPasswordAttributes">
+<code class="descclassname">SymantecServices.</code><code class="descname">setTemporaryPasswordAttributes</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>expirationTime=None</em>, <em>oneTimeUseOnly=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.setTemporaryPasswordAttributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.setTemporaryPasswordSMSDelivery">
+<code class="descclassname">SymantecServices.</code><code class="descname">setTemporaryPasswordSMSDelivery</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>phoneNumber</em>, <em>smsFrom=None</em>, <em>messageTemplate=None</em>, <em>gatewayId=None</em>, <em>gatewayPassword=None</em>, <em>temporaryPassword=None</em>, <em>expirationDate=None</em>, <em>oneTimeUseOnly=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.setTemporaryPasswordSMSDelivery" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.setTemporaryPasswordVoiceDelivery">
+<code class="descclassname">SymantecServices.</code><code class="descname">setTemporaryPasswordVoiceDelivery</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>phoneNumber</em>, <em>language=None</em>, <em>temporaryPassword=None</em>, <em>expirationDate=None</em>, <em>oneTimeUseOnly=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.setTemporaryPasswordVoiceDelivery" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.sys">
+<code class="descclassname">SymantecServices.</code><code class="descname">sys</code><em class="property"> = &lt;module 'sys' (built-in)&gt;</em><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.sys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.updateCredential">
+<code class="descclassname">SymantecServices.</code><code class="descname">updateCredential</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>credentialId</em>, <em>credentialType</em>, <em>friendlyName</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.updateCredential" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="symantec_package.lib.allServices.SymantecServices.SymantecServices.updateUser">
+<code class="descclassname">SymantecServices.</code><code class="descname">updateUser</code><span class="sig-paren">(</span><em>requestId</em>, <em>userId</em>, <em>newUserId=None</em>, <em>newUserStatus=None</em>, <em>oldPin=None</em>, <em>newPin=None</em>, <em>forcePinChange=None</em>, <em>onBehalfOfAccountId=None</em><span class="sig-paren">)</span><a class="headerlink" href="#symantec_package.lib.allServices.SymantecServices.SymantecServices.updateUser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-symantec_package.lib.allServices">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-symantec_package.lib.allServices" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">symantec_package.lib.allServices package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-symantec_package.lib.allServices.SymantecServices">symantec_package.lib.allServices.SymantecServices module</a></li>
+<li><a class="reference internal" href="#module-symantec_package.lib.allServices">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/VIP_Python/symantec_package.lib.allServices.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Symantec VIP Python  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Symantec VIP.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5a2.
+    </div>
+  </body>
+</html>
