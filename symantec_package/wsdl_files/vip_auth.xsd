@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vips="https://schemas.vip.symantec.com/2006/08/vipservice" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="https://schemas.vip.symantec.com/2006/08/vipservice"><include schemaLocation="vip_common_auth.xsd"/><element name="GetServerTime" nillable="true" type="vips:GetServerTimeType"/><complexType name="GetServerTimeType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Get server time.
+                </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:RequestAbstractType"/>
+		</complexContent>
+	</complexType><element name="GetServerTimeResponse" type="vips:GetServerTimeResponseType"/><complexType name="GetServerTimeResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to get server time.
+                </documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="Timestamp" type="dateTime"/>
+					<element minOccurs="0" name="UTCTimestamp" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="ActivateToken" type="vips:ActivateTokenType"/><complexType name="ActivateTokenType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Activates a Token. Includes the token ID and two consecutive OTPs.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element minOccurs="0" name="OTP1" type="vips:OTPType"/>
+					<element minOccurs="0" name="OTP2" type="vips:OTPType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="ActivateTokenResponse" type="vips:ActivateTokenResponseType"/><complexType name="ActivateTokenResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to a request to activate a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="SameInitialState" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="DeactivateToken" type="vips:DeactivateTokenType"/><complexType name="DeactivateTokenType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to deactivate a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element minOccurs="0" ref="vips:Reason"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="DeactivateTokenResponse" type="vips:DeactivateTokenResponseType"/><complexType name="DeactivateTokenResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to deactivate a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="SameInitialState" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="EnableToken" type="vips:EnableTokenType"/><complexType name="EnableTokenType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to enable a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType"/>
+		</complexContent>
+	</complexType><element name="EnableTokenResponse" type="vips:EnableTokenResponseType"/><complexType name="EnableTokenResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to enable a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="SameInitialState" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="DisableToken" type="vips:DisableTokenType"/><complexType name="DisableTokenType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to disable a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element minOccurs="0" ref="vips:Reason"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="DisableTokenResponse" type="vips:DisableTokenResponseType"/><complexType name="DisableTokenResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to disable a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="SameInitialState" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="UnlockToken" type="vips:UnlockTokenType"/><complexType name="UnlockTokenType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to unlock a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType"/>
+		</complexContent>
+	</complexType><element name="UnlockTokenResponse" type="vips:UnlockTokenResponseType"/><complexType name="UnlockTokenResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to unlock a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="SameInitialState" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="Validate" type="vips:ValidateType"/><complexType name="ValidateType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to validate an OTP. Includes the token ID and OTP to be validated.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element name="OTP" type="vips:OTPType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="ValidateResponse" type="vips:ValidateResponseType"/><complexType name="ValidateResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to a request to validate an OTP.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="NetworkAlert" type="boolean"/>
+					<element minOccurs="0" name="TokenCategoryDetails" type="vips:TokenCategoryDetailsType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="Synchronize" type="vips:SynchronizeType"/><complexType name="SynchronizeType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to sync a Token. Includes the token ID and two consecutive OTPs.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element name="OTP1" type="vips:OTPType"/>
+					<element name="OTP2" type="vips:OTPType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SynchronizeResponse" type="vips:SynchronizeResponseType"/><complexType name="SynchronizeResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to a request to sync a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType"/>
+		</complexContent>
+	</complexType><element name="ValidateMultiple" type="vips:ValidateMultipleType"/><complexType name="ValidateMultipleType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to validate multiple Tokens with one OTP
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AccountRequestAbstractType">
+				<sequence>
+					<element maxOccurs="5" minOccurs="2" name="TokenIds" type="vips:TokenIdType"/>
+					<element name="OTP" type="vips:OTPType"/>
+					<element minOccurs="0" name="SendSuccessfulTokenId" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="ValidateMultipleResponse" type="vips:ValidateMultipleResponseType"/><complexType name="ValidateMultipleResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to a request to validate an OTP for multiple Tokens.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="SuccessfulTokenId" type="vips:TokenIdType"/>
+					<element minOccurs="0" name="TokenCategoryDetails" type="vips:TokenCategoryDetailsType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="CheckOTP" type="vips:CheckOTPType"/><complexType name="CheckOTPType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Verifies the OTP for the Token
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element name="OTP1" type="vips:OTPType"/>
+					<element minOccurs="0" name="OTP2" type="vips:OTPType"/>
+					<element default="false" minOccurs="0" name="acceptTemporaryPassword" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="CheckOTPResponse" type="vips:CheckOTPResponseType"/><complexType name="CheckOTPResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Response to a request to verify the OTP.
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence>
+					<element minOccurs="0" name="TokenCategoryDetails" type="vips:TokenCategoryDetailsType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SetTemporaryPassword" type="vips:SetTemporaryPasswordType"/><complexType name="SetTemporaryPasswordType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to set the temporary password for a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element name="TemporaryPassword" type="vips:TempPwdType"/>
+					<element minOccurs="0" name="ExpirationDate" type="dateTime"/>
+					<element minOccurs="0" name="OneTimeUseOnly" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SetTemporaryPasswordResponse" type="vips:SetTemporaryPasswordResponseType"/><complexType name="SetTemporaryPasswordResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to set temporary password for a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType"/>
+		</complexContent>
+	</complexType><element name="SetTemporaryPwdExpiration" type="vips:SetTemporaryPwdExpirationType"/><complexType name="SetTemporaryPwdExpirationType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to set the temporary password expiration for a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element name="ExpirationDate" type="dateTime"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SetTemporaryPwdExpirationResponse" type="vips:SetTemporaryPwdExpirationResponseType"/><complexType name="SetTemporaryPwdExpirationResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to set temporary password expiration for a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType"/>
+		</complexContent>
+	</complexType><element name="GetTemporaryPwdExpiration" type="vips:GetTemporaryPwdExpirationType"/><complexType name="GetTemporaryPwdExpirationType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to get the temporary password expiration for a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType"/>
+		</complexContent>
+	</complexType><element name="GetTemporaryPwdExpirationResponse" type="vips:GetTemporaryPwdExpirationResponseType"/><complexType name="GetTemporaryPwdExpirationResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to get temporary password expiration for a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="ExpirationDate" type="dateTime"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="GetTokenInformation" type="vips:GetTokenInformationType"/><complexType name="GetTokenInformationType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Gets detailed token information for the Token
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType"/>
+		</complexContent>
+	</complexType><element name="GetTokenInformationResponse" type="vips:GetTokenInformationResponseType"/><complexType name="GetTokenInformationResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Response to a request to get token information
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" ref="vips:TokenInformation"/>
+					<element minOccurs="0" ref="vips:NetworkIntelligence"/>
+					<element minOccurs="0" name="ChallengeResponseFormat" type="vips:ChallengeResponseFormatType"/>
+					<element minOccurs="0" name="TokenCategoryDetails" type="vips:TokenCategoryDetailsType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="GetAdminCode" type="vips:GetAdminCodeType"/><complexType name="GetAdminCodeType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Gets admin code for a Token
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element ref="vips:RequestCode"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="GetAdminCodeResponse" type="vips:GetAdminCodeResponseType"/><complexType name="GetAdminCodeResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Recovery code
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="RecoveryCode" type="string"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SendOTP" type="vips:SendOTPType"/><complexType name="SendOTPType">
+		<annotation>
+			<documentation xml:lang="en">
+            		XML to send OTP via SMS for given token
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence minOccurs="0">
+				<element minOccurs="0" name="SMSDeliveryInfo" type="vips:SMSDeliveryInfoType"/>
+					<element minOccurs="0" name="VoiceDeliveryInfo" type="vips:VoiceDeliveryInfoType"/>
+					</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SendOTPResponse" type="vips:SendOTPResponseType"/><complexType name="SendOTPResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Response to a request to send OTP, returns success or failure with reason code
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="OTP" type="vips:OTPType"/>
+					<element minOccurs="0" name="GatewayResponse" type="vips:GatewayResponseType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="Register" type="vips:RegisterType"/><complexType name="RegisterType">
+		<annotation>
+			<documentation xml:lang="en">
+            		XML to Register phone number
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence minOccurs="0">
+				<element minOccurs="0" name="DeliverOTP" type="boolean"/>
+					<element minOccurs="0" name="SMSDeliveryInfo" type="vips:SMSDeliveryInfoType"/>
+					<element minOccurs="0" name="VoiceDeliveryInfo" type="vips:VoiceDeliveryInfoType"/>
+					</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="RegisterResponse" type="vips:RegisterResponseType"/><complexType name="RegisterResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Response to a request to register phone, returns success or failure with reason code
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="OTP" type="vips:OTPType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SendTemporaryPassword" type="vips:SendTemporaryPasswordType"/><complexType name="SendTemporaryPasswordType">
+		<annotation>
+			<documentation xml:lang="en">
+            		XML to send temporary password to phone number
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					
+					<element minOccurs="0" name="PhoneNumber" type="vips:PhoneNumberType"/>
+				<element minOccurs="0" name="Destination" type="vips:DestinationType"/>
+				<element minOccurs="0" name="GatewayAcctInfo" type="vips:GatewayAcctInfoType"/>
+				<element minOccurs="0" name="ExpirationDate" type="dateTime"/>
+				<element minOccurs="0" name="SMSDeliveryInfo" type="vips:SMSDeliveryInfoType"/>
+				<element minOccurs="0" name="VoiceDeliveryInfo" type="vips:VoiceDeliveryInfoType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SendTemporaryPasswordResponse" type="vips:SendTemporaryPasswordResponseType"/><complexType name="SendTemporaryPasswordResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Response to get account information, returns success or failure with reason code
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType"/>
+		</complexContent>
+	</complexType><element name="GenerateTemporaryPassword" type="vips:GenerateTemporaryPasswordType"/><complexType name="GenerateTemporaryPasswordType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to generate a new temporary password for a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="ExpirationDate" type="dateTime"/>
+					<element minOccurs="0" name="OneTimeUseOnly" type="boolean"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="GenerateTemporaryPasswordResponse" type="vips:GenerateTemporaryPasswordResponseType"/><complexType name="GenerateTemporaryPasswordResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response to generate a temporary password for a Token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element name="TemporaryPassword" type="vips:TempPwdType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SubmitTxnVerification" type="vips:SubmitTxnVerificationType"/><complexType name="SubmitTxnVerificationType">
+		<annotation>
+			<documentation xml:lang="en">
+				Message to send voice or SMS transaction verification request.
+				For SMS messages the requests can only be submitted, not polled.
+				For voice messages the request can be submitted and optionally polled for success/failure.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AccountRequestAbstractType">
+				<sequence>
+					<element name="PhoneNumber" type="vips:PhoneNumberType"/>
+					<element minOccurs="0" name="TxnOTP" type="vips:TxnOTPType"/>
+					<element minOccurs="0" name="Language" type="vips:LanguageType"/>
+					<element name="VoiceTemplateName" type="vips:TemplateNameType"/>
+					<element maxOccurs="16" minOccurs="0" name="NamedParam" type="vips:NameValuePairType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SubmitTxnVerificationResponse" type="vips:SubmitTxnVerificationResponseType"/><complexType name="SubmitTxnVerificationResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            	Response to a SubmitTxnVerification request. Gives the status along with a tracking number,
+				that the client can use to poll.
+        	</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="TxnId" type="vips:TxnIdType"/>
+					<element minOccurs="0" name="TxnOTP" type="vips:TxnOTPType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="PollTxnVerification" type="vips:PollTxnVerificationType"/><complexType name="PollTxnVerificationType">
+		<annotation>
+			<documentation xml:lang="en">
+				Message to poll a previously submitted voice call.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AccountRequestAbstractType">
+				<sequence>
+					<element minOccurs="0" name="TxnId" type="vips:TxnIdType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="PollTxnVerificationResponse" type="vips:PollTxnVerificationResponseType"/><complexType name="PollTxnVerificationResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+				Response to a PollTxnVerification call.
+        	</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="TxnOTP" type="vips:TxnOTPType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="DeliverTxnOTP" type="vips:DeliverTxnOTPType"/><complexType name="DeliverTxnOTPType">
+		<annotation>
+			<documentation xml:lang="en">
+				Set or Generate a Pin and deliver to the phone number through SMS or Voice as specified.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AccountRequestAbstractType">
+				<sequence>
+					
+				<element minOccurs="0" name="TxnOTP" type="vips:TxnOTPType"/>
+					<element name="Destination" type="vips:DestinationType"/>
+					<element minOccurs="0" name="SMSDeliveryInfo" type="vips:SMSDeliveryInfoType"/>
+					<element minOccurs="0" name="VoiceDeliveryInfo" type="vips:VoiceDeliveryInfoType"/>
+					</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="DeliverTxnOTPResponse" type="vips:DeliverTxnOTPResponseType"/><complexType name="DeliverTxnOTPResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            	Response to a DeliverTxnOTP request.
+        	</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence>
+					<element minOccurs="0" name="TxnId" type="vips:TxnIdType"/>
+					<element minOccurs="0" name="GatewayResponse" type="vips:GatewayResponseType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="VerifyTxnOTP" type="vips:VerifyTxnOTPType"/><complexType name="VerifyTxnOTPType">
+		<annotation>
+			<documentation xml:lang="en">
+				Pin Verification.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AccountRequestAbstractType">
+				<sequence>
+					<element name="TxnId" type="vips:TxnIdType"/>
+					<element name="TxnOTP" type="vips:TxnOTPType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="VerifyTxnOTPResponse" type="vips:VerifyTxnOTPResponseType"/><complexType name="VerifyTxnOTPResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            	Response to a VerifyTxnOTP request.
+        	</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType"/>
+		</complexContent>
+	</complexType><element name="ValidateCR" type="vips:ValidateCRType"/><complexType name="ValidateCRType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Request to validate a challenge/response. Both the challenge and the response should be provided as inputs.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:MultipleTokensRequestType">
+				<sequence>
+					
+					<element minOccurs="0" name="NumericChallenge" type="vips:NumericChallengeType"/>
+				<element minOccurs="0" name="HexChallenge" type="vips:HexChallengeType"/>
+				<element name="Response" type="vips:OTPType"/>
+				<element default="false" name="CheckOnly" type="boolean"/>
+				<element minOccurs="0" name="Usage" type="vips:OCRAUsageType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="ValidateCRResponse" type="vips:ValidateCRResponseType"/><complexType name="ValidateCRResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+                    Response for validating a challenge/response.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="SuccessfulTokenId" type="vips:TokenIdType"/>
+					<element minOccurs="0" name="NetworkAlert" type="boolean"/>
+					<element minOccurs="0" name="TokenCategoryDetails" type="vips:TokenCategoryDetailsType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="DeliverSMS" type="vips:DeliverSMSType"/><complexType name="DeliverSMSType">
+		<annotation>
+			<documentation xml:lang="en">
+            		XML schema to send an SMS
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element minOccurs="0" name="SMSOperation" type="vips:SMSOperationType"/>
+					<element name="SMSDeliveryInfo" type="vips:SMSDeliveryInfoType"/>
+					<element minOccurs="0" name="GatewayAcctInfo" type="vips:GatewayAcctInfoType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="DeliverSMSResponse" type="vips:DeliverSMSResponseType"/><complexType name="DeliverSMSResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Response to a request to deliver an SMS message, returns success or failure with reason code
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="GatewayResponse" type="vips:GatewayResponseType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="GetAdapterConfiguration" type="vips:GetAdapterConfigurationType"/><complexType name="GetAdapterConfigurationType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Gets adapter configuration information
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AccountRequestAbstractType">
+				<sequence>
+					<element ref="vips:Adapter"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="GetAdapterConfigurationResponse" type="vips:GetAdapterConfigurationResponseType"/><complexType name="GetAdapterConfigurationResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Response to a request to get adapter configuration information
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+				<element minOccurs="0" ref="vips:AdapterInfoServerOTP"/>
+					<element minOccurs="0" ref="vips:AdapterInfoEventBased"/>
+					<element minOccurs="0" ref="vips:AdapterInfoTimeBased"/>
+					<element minOccurs="0" ref="vips:AdapterInfoHOTPTimeBased"/>
+					<element minOccurs="0" ref="vips:AdapterInfoSMSOTP"/>
+					<element minOccurs="0" ref="vips:AdapterInfoVoiceOTP"/>
+					<element minOccurs="0" ref="vips:AdapterInfoChallengeResponseBased"/>
+					</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SetAdapterConfiguration" type="vips:SetAdapterConfigurationType"/><complexType name="SetAdapterConfigurationType">
+		<annotation>
+			<documentation xml:lang="en">
+            		sets adapter configuration information
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AccountRequestAbstractType">
+				<sequence>
+					<element ref="vips:Adapter"/>
+				<element minOccurs="0" ref="vips:AdapterInfoServerOTP"/>
+				<element minOccurs="0" ref="vips:AdapterInfoEventBased"/>
+				<element minOccurs="0" ref="vips:AdapterInfoTimeBased"/>
+				<element minOccurs="0" ref="vips:AdapterInfoHOTPTimeBased"/>
+				<element minOccurs="0" ref="vips:AdapterInfoSMSOTP"/>
+				<element minOccurs="0" ref="vips:AdapterInfoVoiceOTP"/>
+				<element minOccurs="0" ref="vips:AdapterInfoChallengeResponseBased"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SetAdapterConfigurationResponse" type="vips:SetAdapterConfigurationResponseType"/><complexType name="SetAdapterConfigurationResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Response to a request to set adapter configuration information
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType"/>
+		</complexContent>
+	</complexType><element name="SetTokenAttributes" type="vips:SetTokenAttributesType"/><complexType name="SetTokenAttributesType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Sets the token attributes.
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:TokenRequestType">
+				<sequence>
+					<element name="ProofOfPossession" type="vips:DigestType"/>
+					<element maxOccurs="16" minOccurs="1" name="Attribute" type="vips:NameValuePairType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType><element name="SetTokenAttributesResponse" type="vips:SetTokenAttributesResponseType"/><complexType name="SetTokenAttributesResponseType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Response to a request to set token attributes.
+            		Returns a set of key-value pairs.
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseWithStatusType">
+				<sequence minOccurs="0">
+					<element maxOccurs="16" minOccurs="0" name="Attribute" type="vips:NameValuePairType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType></schema>

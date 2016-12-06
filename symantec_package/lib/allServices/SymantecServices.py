@@ -32,6 +32,30 @@ class SymantecServices:
 # ******************** MULTIPLE CLIENT FUNCTIONS
     def authenticateUserWithPushThenPolling(self, requestIdPush, requestIdPoll, userId, queryTimeout=60, queryInterval=5,
                                             displayParams=None, requestParams=None, authContext=None, onBehalfOfAccountId=None):
+
+        """
+                    :description: *Uses both query and management clients as well as simple logic to provide a sample solution to authenicating a login quickly with pushing to mobile*
+                    :note:
+                    :param requestIds: A unique identifier of the request for the enterprise application. This may be useful for troubleshooting
+                    :type requestIds: string
+                    :param userId: Unique user ID (i.e.- email address, login name). Accepts 1 - 128 characters. Case-sensitive.
+                    :type userId: string
+                    :param queryTimeout: The time in seconds on how long the function will poll for before timing out.
+                    :type queryTimeout: int
+                    :param queryInterval: The time in seconds on how frequent the function will send a poll request.
+                    :type queryInterval: int
+                    :param displayParams: Passes and displays content to end users in the push notification. You can customize display messages up to 250 characters. However, some phones may not display complete messages. The following keys are currently supported: Note: This input field contains parameters that define the push notification that is sent to the user’s push-capable mobile device. - display.message.title: Title of themodal This value is used for standard push authentication requests. It is not applicable to biometric fingerprint or VIP PIN authentication on the mobile device. - display.message.text: Text of modal - display.message.profile: Indicates the login URL or profile.
+                    :type displayParams: list
+                    :param requestParams: The following keys are currently supported: request.timeout: numeric value that indicates the timeout period in seconds of the push authentication request that is sent to the user’s mobile devices.
+                    :type requestParams: list
+                    :param authContext: A map containing the parameters that control how the authentication is performed. Example format: authContext={"params":{"Key":authLevel.level, "Value":<the authentication level described next>}}. VIP User Services accepts an authentication level for the authContext field. The authentication level defines the credential types that can be validated with this request. This level must match an authentication level configured in VIP Manager. ■ Key: Enter authLevel.level ■ Value: Enter the authentication level value (as an integer from 1 - 10).
+                    :type authContext: dict
+                    :param onBehalfOfAccountId: The parent account that this request is done on behalf of a child account. The parent account uses its own certificate to authenticate the request to VIP User Services.
+                    :type onBehalfOfAccountId: string
+                    :returns:  the return SOAP response.
+                    :raises:
+
+                """
         import time
 
         res = ""

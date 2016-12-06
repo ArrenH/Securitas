@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:vipusauth="https://schemas.symantec.com/vip/2011/04/vipuserservices/auth" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:vipus="https://schemas.symantec.com/vip/2011/04/vipuserservices" name="VIPUserServices" targetNamespace="https://schemas.symantec.com/vip/2011/04/vipuserservices/auth">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="https://schemas.symantec.com/vip/2011/04/vipuserservices" schemaLocation="vipuserservices-1.7.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="AuthenticateUserRequest">
+		<wsdl:part name="AuthenticateUserRequest" element="vipus:AuthenticateUserRequest"/>
+	</wsdl:message>
+	<wsdl:message name="AuthenticateUserResponse">
+		<wsdl:part name="AuthenticateUserResponse" element="vipus:AuthenticateUserResponse"/>
+	</wsdl:message>
+	<wsdl:message name="AuthenticateUserWithPushRequest">
+		<wsdl:part name="AuthenticateUserWithPushRequest" element="vipus:AuthenticateUserWithPushRequest"/>
+	</wsdl:message>
+	<wsdl:message name="AuthenticateUserWithPushResponse">
+		<wsdl:part name="AuthenticateUserWithPushResponse" element="vipus:AuthenticateUserWithPushResponse"/>
+	</wsdl:message>
+	<wsdl:message name="AuthenticateCredentialsRequest">
+		<wsdl:part name="AuthenticateCredentialsRequest" element="vipus:AuthenticateCredentialsRequest"/>
+	</wsdl:message>
+	<wsdl:message name="AuthenticateCredentialsResponse">
+		<wsdl:part name="AuthenticateCredentialsResponse" element="vipus:AuthenticateCredentialsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="EvaluateRiskRequest">
+	    <wsdl:part name="EvaluateRiskRequest" element="vipus:EvaluateRiskRequest"/>
+	</wsdl:message>
+	<wsdl:message name="EvaluateRiskResponse">
+	    <wsdl:part name="EvaluateRiskResponse" element="vipus:EvaluateRiskResponse"/>
+	</wsdl:message>	
+	<wsdl:message name="CheckOtpRequest">
+	    <wsdl:part name="CheckOtpRequest" element="vipus:CheckOtpRequest" />
+	</wsdl:message>
+	<wsdl:message name="CheckOtpResponse">
+	    <wsdl:part name="CheckOtpResponse" element="vipus:CheckOtpResponse" />
+	</wsdl:message>
+	<wsdl:message name="ConfirmRiskRequest">
+	    <wsdl:part name="ConfirmRiskRequest" element="vipus:ConfirmRiskRequest" />
+	</wsdl:message>
+	<wsdl:message name="ConfirmRiskResponse">
+	    <wsdl:part name="ConfirmRiskResponse" element="vipus:ConfirmRiskResponse" />
+	</wsdl:message>
+	<wsdl:message name="DenyRiskRequest">
+	    <wsdl:part name="DenyRiskRequest" element="vipus:DenyRiskRequest" />
+	</wsdl:message>
+	<wsdl:message name="DenyRiskResponse">
+	    <wsdl:part name="DenyRiskResponse" element="vipus:DenyRiskResponse" />
+	</wsdl:message>		
+					
+	<wsdl:portType name="AuthenticationServicePort">
+		<wsdl:operation name="authenticateUser">
+			<wsdl:input message="vipusauth:AuthenticateUserRequest"/>
+			<wsdl:output message="vipusauth:AuthenticateUserResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="authenticateUserWithPush">
+			<wsdl:input message="vipusauth:AuthenticateUserWithPushRequest"/>
+			<wsdl:output message="vipusauth:AuthenticateUserWithPushResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="authenticateCredentials">
+			<wsdl:input message="vipusauth:AuthenticateCredentialsRequest"/>
+			<wsdl:output message="vipusauth:AuthenticateCredentialsResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="evaluateRisk">
+			<wsdl:input message="vipusauth:EvaluateRiskRequest"/>
+			<wsdl:output message="vipusauth:EvaluateRiskResponse"/>
+		</wsdl:operation>	
+	    <wsdl:operation name="checkOtp">
+	        <wsdl:input message="vipusauth:CheckOtpRequest"/>
+	        <wsdl:output message="vipusauth:CheckOtpResponse"/>
+	    </wsdl:operation>    
+	    <wsdl:operation name="confirmRisk">
+	        <wsdl:input message="vipusauth:ConfirmRiskRequest"/>
+	        <wsdl:output message="vipusauth:ConfirmRiskResponse"/>
+	    </wsdl:operation>    
+	    <wsdl:operation name="denyRisk">
+	        <wsdl:input message="vipusauth:DenyRiskRequest"/>
+	        <wsdl:output message="vipusauth:DenyRiskResponse"/>    
+	    </wsdl:operation> 
+		 				           				
+	</wsdl:portType>	
+	<wsdl:binding name="AuthenticationServiceSoapBinding" type="vipusauth:AuthenticationServicePort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="authenticateUser">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="authenticateUserWithPush">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>		
+		<wsdl:operation name="authenticateCredentials">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>		
+		<wsdl:operation name="evaluateRisk">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>		
+	    <wsdl:operation name="confirmRisk">
+	      	<soap:operation soapAction="" style="document"/>
+	      	<wsdl:input>
+	        	<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	      	</wsdl:input>
+	      	<wsdl:output>
+	        	<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	      	</wsdl:output>
+	    </wsdl:operation>    
+	    <wsdl:operation name="denyRisk">
+	      	<soap:operation soapAction="" style="document"/>
+	      	<wsdl:input>
+	        	<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	      	</wsdl:input>
+	      	<wsdl:output>
+	        	<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	      	</wsdl:output>  
+	    </wsdl:operation>
+			
+	    <wsdl:operation name="checkOtp">
+	      	<soap:operation soapAction="" style="document"/>
+	      	<wsdl:input>
+	        	<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	      	</wsdl:input>
+	      	<wsdl:output>
+	        	<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	      	</wsdl:output>
+	    </wsdl:operation>    
+	    					        			
+	</wsdl:binding>
+	<wsdl:service name="AuthenticationService">
+		<wsdl:port name="AuthenticationServicePort" binding="vipusauth:AuthenticationServiceSoapBinding">
+			<soap:address location="https://userservices-auth.vip.symantec.com/vipuserservices/AuthenticationService_1_7"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

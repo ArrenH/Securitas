@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by Roy (VeriSign Inc.) -->
+<xs:schema xmlns="https://schemas.symantec.com/vip/2011/04/vipuserservices" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://schemas.symantec.com/vip/2011/04/vipuserservices" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="BaseRequestType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Acts as the base type for all the requests.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="requestId" type="RequestIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaseRequestWithAccountIdType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Acts as the base type for all the requests that are sent on behalf of another account ID. In such cases,
+			the sender will either be a super admin or a parent of the onBehalfOfAccountId.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="BaseRequestType">
+				<xs:sequence>
+					<xs:element name="onBehalfOfAccountId" type="AccountIdType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BaseResponseType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Acts as the base type for all the responses.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="requestId" type="RequestIdType"/>
+			<xs:element name="status" type="xs:hexBinary"/>
+			<xs:element name="statusMessage" type="xs:string"/>
+			<xs:element name="detail" type="xs:hexBinary" minOccurs="0"/>
+			<xs:element name="detailMessage" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetServerTimeRequest" type="GetServerTimeRequestType"/>
+	<xs:complexType name="GetServerTimeRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetServerTimeResponse" type="GetServerTimeResponseType"/>
+	<xs:complexType name="GetServerTimeResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="timestamp" type="xs:dateTime" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CreateUserRequest" type="CreateUserRequestType"/>
+	<xs:complexType name="CreateUserRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="pin" type="PinType" minOccurs="0"/>						
+					<xs:element name="forcePinChange" type="xs:boolean" minOccurs="0"/>				
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CreateUserResponse" type="CreateUserResponseType"/>
+	<xs:complexType name="CreateUserResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UpdateUserRequest" type="UpdateUserRequestType"/>
+	<xs:complexType name="UpdateUserRequestType" abstract="false">
+		<xs:annotation>
+			<xs:documentation>
+				This request object can be used to rename the user.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="newUserId" type="UserIdType" minOccurs="0"/>
+					<xs:element name="newUserStatus" type="UserStatusEnum" minOccurs="0"/>
+					<xs:element name="oldPin" type="PinType" minOccurs="0"/>				
+					<xs:element name="newPin" type="PinType" minOccurs="0"/>
+					<xs:element name="forcePinChange" type="xs:boolean" minOccurs="0"/>	 									
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UpdateUserResponse" type="UpdateUserResponseType"/>
+	<xs:complexType name="UpdateUserResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeleteUserRequest" type="DeleteUserRequestType"/>
+	<xs:complexType name="DeleteUserRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeleteUserResponse" type="DeleteUserResponseType"/>
+	<xs:complexType name="DeleteUserResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ClearUserPinRequest" type="ClearUserPinRequestType"/>
+	<xs:complexType name="ClearUserPinRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ClearUserPinResponse" type="ClearUserPinResponseType"/>
+	<xs:complexType name="ClearUserPinResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>	
+	<xs:element name="AddCredentialRequest" type="AddCredentialRequestType"/>
+	<xs:complexType name="AddCredentialRequestType" abstract="false">
+		<xs:annotation>
+			<xs:documentation> 
+				Request for adding a credential under a user. 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="credentialDetail" type="CredentialDetailType"/>
+					<xs:choice id="addCredAuthDataTypeChoice" minOccurs="0">
+						<xs:element name="otpAuthData" type="OtpAuthDataType"/>
+					</xs:choice>
+					<xs:element name="trustedDevice" type="xs:boolean" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="AddCredentialResponse" type="AddCredentialResponseType"/>
+	<xs:complexType name="AddCredentialResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UpdateCredentialRequest" type="UpdateCredentialRequestType"/>
+	<xs:complexType name="UpdateCredentialRequestType" abstract="false">
+		<xs:annotation>
+			<xs:documentation> To update credential's friendly name.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="credentialId" type="CredentialIdType"/>
+					<xs:element name="credentialType" type="CredentialTypeEnum"/>
+					<xs:element name="friendlyName" type="FriendlyNameType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UpdateCredentialResponse" type="UpdateCredentialResponseType"/>
+	<xs:complexType name="UpdateCredentialResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RemoveCredentialRequest" type="RemoveCredentialRequestType"/>
+	<xs:complexType name="RemoveCredentialRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="credentialId" type="CredentialIdType"/>
+					<xs:element name="credentialType" type="CredentialTypeEnum"/>
+					<xs:element name="trustedDevice" type="xs:boolean" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RemoveCredentialResponse" type="RemoveCredentialResponseType"/>
+	<xs:complexType name="RemoveCredentialResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetUserInfoRequest" type="GetUserInfoRequestType"/>
+	<xs:complexType name="GetUserInfoRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType" />
+					<xs:element name="iaInfo" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true"></xs:element>
+					<xs:element name="includePushAttributes" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true"></xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetUserInfoResponse" type="GetUserInfoResponseType"/>
+	<xs:complexType name="GetUserInfoResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="userId" type="UserIdType" minOccurs="0"/>
+					<xs:element name="userCreationTime" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="userStatus" type="UserStatusEnum" minOccurs="0"/>
+					<xs:element name="numBindings" type="xs:integer" minOccurs="0"/>
+					<xs:element name="credentialBindingDetail" type="CredentialBindingDetailType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="isPinSet" type="xs:boolean" minOccurs="0"/>		
+					<xs:element name="isTempPasswordSet" type="xs:boolean" minOccurs="0"/>		
+					<xs:element name="pinExpirationTime" type="xs:dateTime" minOccurs="0"/>					
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetCredentialInfoRequest" type="GetCredentialInfoRequestType"/>
+	<xs:complexType name="GetCredentialInfoRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="credentialId" type="CredentialIdType"/>
+					<xs:element name="credentialType" type="CredentialTypeEnum"/>
+					<xs:element name="includePushAttributes" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true"></xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetCredentialInfoResponse" type="GetCredentialInfoResponseType"/>
+	<xs:complexType name="GetCredentialInfoResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="credentialId" type="CredentialIdType" minOccurs="0"/>
+					<xs:element name="credentialType" type="CredentialTypeEnum" minOccurs="0"/>
+					<xs:element name="credentialStatus" type="CredentialStatusType" minOccurs="0"/>
+					<xs:element name="numBindings" type="xs:integer" minOccurs="0"/>
+					<xs:element name="pushAttributes" type="KeyValuePairType" minOccurs="0" maxOccurs="20" />
+					<xs:element name="userBindingDetail" type="UserBindingDetailType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="AuthenticateUserRequest" type="AuthenticateUserRequestType"/>
+	<xs:complexType name="AuthenticateUserRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="pin" type="PinType" minOccurs="0"/>						
+					<xs:choice id="authUserAuthDataTypeChoice" minOccurs="0">
+						<xs:element name="otpAuthData" type="OtpAuthDataType" minOccurs="0"/>
+					</xs:choice>
+					<xs:element name="authContext" type="AuthContext" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="AuthenticateUserResponse" type="AuthenticateUserResponseType"/>
+	<xs:complexType name="AuthenticateUserResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="credentialId" type="CredentialIdType" minOccurs="0"/>
+					<xs:element name="credentialType" type="CredentialTypeEnum" minOccurs="0"/>
+					<xs:element name="authnId" type="AuthnIdType" minOccurs="0"/>
+					<xs:element name="isPinExpired" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="pinExpirationTime" type="xs:dateTime" minOccurs="0"/>
+					<xs:element name="authContext" type="AuthContext" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SetTemporaryPasswordRequest" type="SetTemporaryPasswordRequestType"/>
+	<xs:complexType name="SetTemporaryPasswordRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="temporaryPassword" type="TemporaryPasswordType" minOccurs="0"/>
+					<xs:element name="temporaryPasswordAttributes" type="TemporaryPasswordAttributesType" minOccurs="0"/>
+					<xs:choice id="deliveryInfoChoice" minOccurs="0">
+						<xs:element name="smsDeliveryInfo" type="SmsDeliveryInfoType" minOccurs="0"/>
+						<xs:element name="voiceDeliveryInfo" type="VoiceDeliveryInfoType" minOccurs="0"/>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SetTemporaryPasswordResponse" type="SetTemporaryPasswordResponseType"/>
+	<xs:complexType name="SetTemporaryPasswordResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence>
+					<xs:element name="temporaryPassword" type="TemporaryPasswordType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ClearTemporaryPasswordRequest" type="ClearTemporaryPasswordRequestType"/>
+	<xs:complexType name="ClearTemporaryPasswordRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ClearTemporaryPasswordResponse" type="ClearTemporaryPasswordResponseType"/>
+	<xs:complexType name="ClearTemporaryPasswordResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SetTemporaryPasswordAttributesRequest" type="SetTemporaryPasswordAttributesRequestType"/>
+	<xs:complexType name="SetTemporaryPasswordAttributesRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="temporaryPasswordAttributes" type="TemporaryPasswordAttributesType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SetTemporaryPasswordAttributesResponse" type="SetTemporaryPasswordAttributesResponseType"/>
+	<xs:complexType name="SetTemporaryPasswordAttributesResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetTemporaryPasswordAttributesRequest" type="GetTemporaryPasswordAttributesRequestType"/>
+	<xs:complexType name="GetTemporaryPasswordAttributesRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetTemporaryPasswordAttributesResponse" type="GetTemporaryPasswordAttributesResponseType"/>
+	<xs:complexType name="GetTemporaryPasswordAttributesResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence>
+					<xs:element name="tempPwdAttributes" type="TemporaryPasswordAttributesType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SendOtpRequest" type="SendOtpRequestType"/>
+	<xs:complexType name="SendOtpRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:choice minOccurs="0">
+						<xs:element name="smsDeliveryInfo" type="SmsDeliveryInfoType" minOccurs="0"/>
+						<xs:element name="voiceDeliveryInfo" type="VoiceDeliveryInfoType" minOccurs="0"/>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SendOtpResponse" type="SendOtpResponseType"/>
+	<xs:complexType name="SendOtpResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RegisterRequest" type="RegisterRequestType"/>
+	<xs:complexType name="RegisterRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:choice>			
+						<xs:element name="smsDeliveryInfo" type="SmsDeliveryInfoType"/>
+						<xs:element name="voiceDeliveryInfo" type="VoiceDeliveryInfoType"/>
+						<xs:element name="serviceOtpDeliveryInfo" type="ServiceOtpDeliveryInfoType"/>						
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RegisterResponse" type="RegisterResponseType"/>
+	<xs:complexType name="RegisterResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence>
+					<xs:element name="otp" type="OtpType" minOccurs="0"/>
+				</xs:sequence>	
+			</xs:extension>		
+		</xs:complexContent>
+	</xs:complexType>	
+	
+	<!-- ============================= -->
+	<!-- IntAuth related types         -->
+	<!-- ============================= -->
+	
+	<xs:element name="EvaluateRiskRequest" type="EvaluateRiskRequestType"/>	
+    <xs:complexType name="EvaluateRiskRequestType" abstract="false">  
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">                
+		        <xs:sequence>        
+		            <xs:element name="UserId" type="UserIdType" />
+		            <xs:element name="Ip" type="IpAddressType" />
+		            <xs:element name="UserAgent" type="UserAgentType" />
+		            <xs:element name="IAAuthData" type="IAAuthDataType" minOccurs="0" />
+		            <xs:element name="KeyValuePairs" type="KeyValuePairType" minOccurs="0" maxOccurs="20" />
+		        </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		        
+    </xs:complexType>  
+	<xs:element name="EvaluateRiskResponse" type="EvaluateRiskResponseType"/>    
+    <xs:complexType name="EvaluateRiskResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">                    
+		        <xs:sequence>
+		            <xs:element name="Risky" type="xs:boolean" minOccurs="0" />
+		            <xs:element name="RiskScore" type="RiskScoreType" minOccurs="0" />
+		            <xs:element name="RiskThreshold" type="RiskScoreType" minOccurs="0" />
+		            <xs:element name="RiskReason" type="xs:string" minOccurs="0" />
+		            <xs:element name="PolicyVersion" type="xs:string" minOccurs="0" />
+		            <xs:element name="EventId" type="EventIdType" minOccurs="0" />
+		            <xs:element name="KeyValuePairs" type="KeyValuePairType" minOccurs="0" maxOccurs="20" />
+		        </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>				        
+    </xs:complexType>
+
+	<xs:element name="ConfirmRiskRequest" type="ConfirmRiskRequestType"/>	    
+    <xs:complexType name="ConfirmRiskRequestType" abstract="false">  
+ 		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">                                   
+		        <xs:sequence>  
+		            <xs:element name="UserId" type="UserIdType" />
+		            <xs:element name="EventId" type="EventIdType" /> 
+		            <xs:element name="VerifyMethod" type="VerifyMethodType" minOccurs="0" />
+		            <xs:element name="KeyValuePairs" type="KeyValuePairType" minOccurs="0" maxOccurs="20" />
+		        </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>			        
+    </xs:complexType> 
+	<xs:element name="ConfirmRiskResponse" type="ConfirmRiskResponseType"/>    
+    <xs:complexType name="ConfirmRiskResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">     
+		        <xs:sequence>                  
+		            <xs:element name="KeyValuePairs" type="KeyValuePairType" minOccurs="0" maxOccurs="20" />
+		        </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	        
+    </xs:complexType> 
+ 	<xs:element name="DenyRiskRequest" type="DenyRiskRequestType"/>	    
+    <xs:complexType name="DenyRiskRequestType" abstract="false">   
+ 		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">                    
+	        <xs:sequence>       
+	            <xs:element name="UserId" type="UserIdType" />
+	            <xs:element name="EventId" type="EventIdType" />
+	            <xs:element name="VerifyMethod" type="VerifyMethodType"  minOccurs="0" />
+	            <xs:element name="IAAuthData" type="IAAuthDataType"  minOccurs="0" />
+	            <xs:element name="RememberDevice" type="xs:boolean"  minOccurs="0" />
+				<xs:element name="FriendlyName" type="FriendlyNameType" minOccurs="0" />
+	            <xs:element name="KeyValuePairs" type="KeyValuePairType"  minOccurs="0" maxOccurs="20" />
+	        </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		        
+    </xs:complexType>  
+	<xs:element name="DenyRiskResponse" type="DenyRiskResponseType"/>    
+    <xs:complexType name="DenyRiskResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">         
+		        <xs:sequence>                  
+		            <xs:element name="KeyValuePairs" type="KeyValuePairType"  minOccurs="0" maxOccurs="20" />
+		        </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>			        
+    </xs:complexType>       
+ 	<xs:complexType name="KeyValuePairType">
+        <xs:sequence>
+            <xs:element name="Key" type="KeyType"> </xs:element>
+            <xs:element name="Value" type="ValueType"></xs:element>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <xs:simpleType name="KeyType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="125"/>
+		</xs:restriction>
+	</xs:simpleType>		
+	<xs:simpleType name="ValueType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0"/>
+			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>	
+	
+	<!-- ============================= -->
+	<!-- COMMON TYPES                  -->
+	<!-- ============================= -->
+	<xs:simpleType name="RequestIdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="4"/>
+			<xs:maxLength value="40"/>
+			<xs:pattern value="[0-9A-Za-z_]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountIdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"/>
+			<xs:maxLength value="50"/>
+			<xs:pattern value="[0-9A-Za-z]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserIdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CredentialIdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="4"/>
+			<xs:maxLength value="100"/>
+			<xs:pattern value="[0-9A-Za-z,#.*]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CredentialTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="STANDARD_OTP"/>
+			<xs:enumeration value="SMS_OTP"/>
+			<xs:enumeration value="VOICE_OTP"/>
+			<xs:enumeration value="SERVICE_OTP"/>
+			<xs:enumeration value="CERTIFICATE"/>
+			<xs:enumeration value="IA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserStatusEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="DISABLED"/>
+			<xs:enumeration value="LOCKED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BindStatusEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ENABLED"/>
+			<xs:enumeration value="DISABLED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CredentialStatusType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FriendlyNameType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="125"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ClientVersionType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="[0-9.]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ClientTypeType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="CredentialDetailType">
+		<xs:sequence>
+			<xs:element name="credentialId" type="CredentialIdType"/>
+			<xs:element name="credentialType" type="CredentialTypeEnum"/>
+			<xs:element name="friendlyName" type="FriendlyNameType" minOccurs="0"/>
+			<xs:element name="trustedDevice" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BindingDetailType">
+		<xs:sequence>
+			<xs:element name="bindStatus" type="BindStatusEnum"/>
+			<xs:element name="friendlyName" type="FriendlyNameType" minOccurs="0"/>
+			<xs:element name="trustedDevice" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="clientVersion" type="ClientVersionType" minOccurs="0"/>
+			<xs:element name="clientType" type="ClientTypeType" minOccurs="0"/>
+			<xs:element name="lastBindTime" type="xs:dateTime"/>
+			<xs:element name="lastAuthnTime" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="lastAuthnId" type="AuthnIdType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CredentialBindingDetailType">
+		<xs:sequence>
+			<xs:element name="credentialId" type="CredentialIdType"/>
+			<xs:element name="credentialType" type="CredentialTypeEnum"/>
+			<xs:element name="credentialStatus" type="CredentialStatusType" minOccurs="0"/>
+			<xs:element name="bindingDetail" type="BindingDetailType"/>
+			<xs:element name="pushAttributes" type="KeyValuePairType" minOccurs="0" maxOccurs="20" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserBindingDetailType">
+		<xs:sequence>
+			<xs:element name="userId" type="UserIdType"/>
+			<xs:element name="userStatus" type="UserStatusEnum"/>
+			<xs:element name="bindingDetail" type="BindingDetailType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="OtpType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="6"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="[0-9A-Za-z]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceFingerPrintType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2048"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="IpAddressType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])" />			
+	    </xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="AbstractAuthDataType" abstract="true"/>
+	<xs:complexType name="OtpAuthDataType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="AbstractAuthDataType">
+				<xs:sequence>
+					<xs:element name="otp" type="OtpType"/>
+					<xs:element name="otp2" type="OtpType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="CredentialDefinitionType" abstract="false">
+	<xs:complexContent>
+			<xs:extension base="AbstractAuthDataType">
+				<xs:sequence>
+					<xs:element name="credentialId" type="CredentialIdType"/>
+					<xs:element name="credentialType" type="CredentialTypeEnum"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
+	
+	<xs:simpleType name="AuthnIdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="4"/>
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TemporaryPasswordType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+            		One Time Password. Limited to 6 bytes.
+        	</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{6,6}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TemporaryPasswordAttributesType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+					
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="expirationTime" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="oneTimeUseOnly" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- DestinationType -->
+	<xs:complexType name="DestinationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+            		Destination type.
+        		</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="type" type="PhoneNumberType" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="PhoneNumberType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{5,20}(x[0-9,#.*]{1,20})?"/>
+        </xs:restriction>
+	</xs:simpleType>
+	<!--SmsDeliveryInfoType-->
+	<xs:complexType name="SmsDeliveryInfoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+            		Contains the branding information.
+        		</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="PhoneNumberType"/>
+			<xs:element name="smsFrom" type="SmsFromType" minOccurs="0"/>
+			<xs:element name="messageTemplate" type="SmsMessageTemplateType" minOccurs="0"/>
+			<xs:element name="gatewayAcctInfo" type="GatewayAcctInfoType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--GatewayAcctInfo-->
+	<xs:complexType name="GatewayAcctInfoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+            		Contains the IMN gateway account information.
+        		</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Id">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Password">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="SmsFromType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{3,20}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SmsMessageTemplateType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="5"/>
+			<xs:maxLength value="140"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--VoiceDeliveryInfoType-->
+	<xs:complexType name="VoiceDeliveryInfoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains the elements for voice type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="PhoneNumberType"/>
+			<xs:element name="Language" type="xs:language" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceOtpDeliveryInfoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Contains the elements for voice type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="CredentialIdType"/>
+		</xs:sequence>
+	</xs:complexType>	
+	<xs:simpleType name="PinType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="4"/>
+			<xs:maxLength value="128"/>					
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:simpleType name="UserAgentType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:simpleType name="IAAuthDataType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>	
+
+	<xs:simpleType name="EventIdType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="18"/>
+            <xs:pattern value="[0-9]+"/>			
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:simpleType name="VerifyMethodType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>	
+    <xs:simpleType name="RiskScoreType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="100"/>
+        </xs:restriction>
+    </xs:simpleType>		
+               
+	<xs:simpleType name="NormalizedRiskScoreType">
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+    
+   <xs:simpleType name="IDType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="3"></xs:minLength>
+    		<xs:maxLength value="64"></xs:maxLength>
+    		<xs:pattern value="[0-9A-Za-z]+"></xs:pattern>
+    	</xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StringDescType">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="0"></xs:minLength>
+    		<xs:maxLength value="256"></xs:maxLength>
+    	</xs:restriction>
+    </xs:simpleType>               	
+                			
+
+	<!-- ============================= -->
+	<!-- Push Auth related Types       -->
+	<!-- ============================= -->
+
+    <xs:simpleType name="PushTransactionIdType">
+	<xs:restriction base="xs:string">
+			<xs:minLength value="4"/>
+			<xs:maxLength value="16"/>
+			<xs:pattern value="[0-9A-Za-z_]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="PushAuthDataType" abstract="false">
+	<xs:complexContent>
+			<xs:extension base="AbstractAuthDataType">
+				<xs:sequence>
+					<xs:element name="displayParameters" type="KeyValuePairType" minOccurs="0" maxOccurs="20" />
+					<xs:element name="requestParameters" type="KeyValuePairType" minOccurs="0" maxOccurs="20" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="PushDetailType" abstract="false">
+		<xs:sequence>
+			<xs:element name="pushCredentialId" type="xs:string" minOccurs="1"/>
+			<xs:element name="pushSent" type="xs:boolean" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="PushTransactionStatusType" abstract="false">
+		<xs:sequence>
+			<xs:element name="transactionId" type="PushTransactionIdType"/>
+			<xs:element name="status" type="xs:hexBinary"/>
+			<xs:element name="statusMessage" type="xs:string"/>
+			<xs:element name="detail" type="xs:hexBinary" minOccurs="0"/>
+			<xs:element name="detailMessage" type="xs:string" minOccurs="0"/>
+			<xs:element name="authnTime" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="credentialId" type="CredentialIdType" minOccurs="0"/>
+			<xs:element name="credentialType" type="CredentialTypeEnum" minOccurs="0"/>		
+			<xs:element name="isPinExpired" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="pinExpirationTime" type="xs:dateTime" minOccurs="0"/>
+			
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="CheckOtpRequest" type="CheckOtpRequestType"/>
+	<xs:complexType name="CheckOtpRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="otpAuthData" type="OtpAuthDataType" />
+					<xs:element name="authContext" type="AuthContext" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CheckOtpResponse" type="CheckOtpResponseType"/>
+	<xs:complexType name="CheckOtpResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="credentialId" type="CredentialIdType" minOccurs="0"/>
+					<xs:element name="credentialType" type="CredentialTypeEnum" minOccurs="0"/>
+					<xs:element name="authnId" type="AuthnIdType" minOccurs="0"/>
+					<xs:element name="authContext" type="AuthContext" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+
+	<xs:element name="AuthenticateUserWithPushRequest" type="AuthenticateUserWithPushRequestType"/>
+	<xs:complexType name="AuthenticateUserWithPushRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="userId" type="UserIdType"/>
+					<xs:element name="pin" type="PinType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="pushAuthData" type="PushAuthDataType" />
+					<xs:element name="authContext" type="AuthContext" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="AuthenticateUserWithPushResponse" type="AuthenticateUserWithPushResponseType"/>
+	<xs:complexType name="AuthenticateUserWithPushResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="transactionId" type="PushTransactionIdType" minOccurs="0"/>
+					<xs:element name="isPinExpired" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="pinExpirationTime" type="xs:dateTime" minOccurs="0"/>
+					<xs:sequence minOccurs="0" maxOccurs="20">
+						<xs:element name="pushDetail"  type="PushDetailType" />
+					</xs:sequence>
+					<xs:element name="authContext" type="AuthContext" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="AuthenticateCredentialsRequest" type="AuthenticateCredentialsRequestType"/>
+	<xs:complexType name="AuthenticateCredentialsRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="credentials" type="CredentialDefinitionType" minOccurs="1" maxOccurs="5"/>
+					<xs:element name="activate" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"></xs:element>
+					<xs:choice>
+						<xs:element name="otpAuthData" type="OtpAuthDataType"/>
+						<xs:element name="pushAuthData" type="PushAuthDataType"/>
+					</xs:choice>
+					<xs:element name="authContext" type="AuthContext" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="AuthenticateCredentialsResponse" type="AuthenticateCredentialsResponseType"/>
+	<xs:complexType name="AuthenticateCredentialsResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="credentialId" type="CredentialIdType" minOccurs="0"/>
+					<xs:element name="credentialType" type="CredentialTypeEnum" minOccurs="0"/>					
+					<xs:element name="transactionId" type="PushTransactionIdType" minOccurs="0"/>
+					<xs:sequence minOccurs="0" maxOccurs="20">
+						<xs:element name="pushDetail"  type="PushDetailType" />
+					</xs:sequence>
+					<xs:element name="authContext" type="AuthContext" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
+
+	<xs:element name="PollPushStatusRequest" type="PollPushStatusRequestType"/>
+	<xs:complexType name="PollPushStatusRequestType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseRequestWithAccountIdType">
+				<xs:sequence>
+					<xs:element name="transactionId" type="PushTransactionIdType" minOccurs="1" maxOccurs="20"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="PollPushStatusResponse" type="PollPushStatusResponseType"/>
+	<xs:complexType name="PollPushStatusResponseType" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="BaseResponseType">
+				<xs:sequence minOccurs="0">
+					<xs:element name="transactionStatus" type="PushTransactionStatusType" minOccurs="0" maxOccurs="20" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AuthContext">
+		<xs:annotation>
+			<xs:documentation>
+			This field contains key-value pairs of parameters required to perform authentication. For instance,
+				authentication level.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="params" type="KeyValuePairType" minOccurs="0" maxOccurs="20" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

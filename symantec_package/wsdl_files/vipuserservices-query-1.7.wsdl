@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:vipusquery="https://schemas.symantec.com/vip/2011/04/vipuserservices/query" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:vipus="https://schemas.symantec.com/vip/2011/04/vipuserservices" name="VIPUserServices" targetNamespace="https://schemas.symantec.com/vip/2011/04/vipuserservices/query">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="https://schemas.symantec.com/vip/2011/04/vipuserservices" schemaLocation="vipuserservices-1.7.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="GetServerTimeRequest">
+		<wsdl:part name="GetServerTimeRequest" element="vipus:GetServerTimeRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetServerTimeResponse">
+		<wsdl:part name="GetServerTimeResponse" element="vipus:GetServerTimeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetUserInfoRequest">
+		<wsdl:part name="GetUserInfoRequest" element="vipus:GetUserInfoRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetUserInfoResponse">
+		<wsdl:part name="GetUserInfoResponse" element="vipus:GetUserInfoResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetCredentialInfoRequest">
+		<wsdl:part name="GetCredentialInfoRequest" element="vipus:GetCredentialInfoRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetCredentialInfoResponse">
+		<wsdl:part name="GetCredentialInfoResponse" element="vipus:GetCredentialInfoResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetTemporaryPasswordAttributesRequest">
+		<wsdl:part name="GetTemporaryPasswordAttributesRequest" element="vipus:GetTemporaryPasswordAttributesRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetTemporaryPasswordAttributesResponse">
+		<wsdl:part name="GetTemporaryPasswordAttributesResponse" element="vipus:GetTemporaryPasswordAttributesResponse"/>
+	</wsdl:message>	
+	<wsdl:message name="PollPushStatusRequest">
+		<wsdl:part name="PollPushStatusRequest" element="vipus:PollPushStatusRequest"/>
+	</wsdl:message>
+	<wsdl:message name="PollPushStatusResponse">
+		<wsdl:part name="PollPushStatusResponse" element="vipus:PollPushStatusResponse"/>
+	</wsdl:message>	
+
+	<wsdl:portType name="QueryServicePort">
+		<wsdl:operation name="getServerTime">
+			<wsdl:input message="vipusquery:GetServerTimeRequest"/>
+			<wsdl:output message="vipusquery:GetServerTimeResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getUserInfo">
+			<wsdl:input message="vipusquery:GetUserInfoRequest"/>
+			<wsdl:output message="vipusquery:GetUserInfoResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getCredentialInfo">
+			<wsdl:input message="vipusquery:GetCredentialInfoRequest"/>
+			<wsdl:output message="vipusquery:GetCredentialInfoResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getTemporaryPasswordAttributes">
+			<wsdl:input message="vipusquery:GetTemporaryPasswordAttributesRequest"/>
+			<wsdl:output message="vipusquery:GetTemporaryPasswordAttributesResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="pollPushStatus">
+			<wsdl:input message="vipusquery:PollPushStatusRequest"/>
+			<wsdl:output message="vipusquery:PollPushStatusResponse"/>
+		</wsdl:operation>					
+	</wsdl:portType>
+	<wsdl:binding name="QueryServiceSoapBinding" type="vipusquery:QueryServicePort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getServerTime">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getUserInfo">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCredentialInfo">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getTemporaryPasswordAttributes">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="pollPushStatus">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>					
+	</wsdl:binding>
+	<wsdl:service name="QueryService">
+		<wsdl:port name="QueryServicePort" binding="vipusquery:QueryServiceSoapBinding">
+			<soap:address location="https://userservices-auth.vip.symantec.com/vipuserservices/QueryService_1_7"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

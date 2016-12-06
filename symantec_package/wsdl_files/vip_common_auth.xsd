@@ -1,0 +1,1240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vips="https://schemas.vip.symantec.com/2006/08/vipservice" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="https://schemas.vip.symantec.com/2006/08/vipservice">
+		
+	<!--
+    		Copyright VeriSign, Inc. All rights reserved.
+	-->
+	<!--VIP Services Schema -->
+	<annotation>
+		<documentation xml:lang="en">XML Schema for VeriSign UA Web Services</documentation>
+	</annotation>
+	<!-- MessageAbstractType -->
+	<complexType abstract="true" name="MessageAbstractType">
+		<annotation>
+			<documentation xml:lang="en">
+            Abstract class for all messages that are part of the UA Web Service.
+        </documentation>
+		</annotation>
+		<attribute name="Version" type="vips:VersionType" use="required"/>
+	</complexType>
+	<!-- VersionType -->
+	<simpleType final="restriction" name="VersionType">
+		<restriction base="string">
+			<pattern value="\d{1,9}\.\d{0,9}"/>
+		</restriction>
+	</simpleType>
+	<!-- AccountIdType -->
+	<simpleType name="AccountIdType">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="32"/>
+			<pattern value="[a-zA-Z0-9]+"/>
+		</restriction>
+	</simpleType>
+	<!-- RequestAbstractType -->
+	<complexType abstract="true" name="RequestAbstractType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Abstract class for all request messages that are supported by the UA Web Service. Id is a pseudo-random number used for request-response matching.
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:MessageAbstractType">
+				<sequence>
+					
+				</sequence>
+				<attribute name="Id" type="vips:IdType" use="optional"/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- IdType -->
+	<simpleType name="IdType">
+		<restriction base="string">
+			<maxLength value="40"/>
+		</restriction>
+	</simpleType>
+	<!-- AccountRequestAbstractType -->
+	<complexType abstract="true" name="AccountRequestAbstractType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Abstract class for all request messages that are supported by the UA Web Service. Id is a pseudo-random number used for request-response matching.
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:RequestAbstractType">
+				<sequence>
+					<element minOccurs="0" name="AuthorizerAccountId" type="vips:AccountIdType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- TokenRequestType -->
+	<complexType abstract="true" name="TokenRequestType">
+		<annotation>
+			<documentation xml:lang="en">
+            		class for all request messages that have token id
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AccountRequestAbstractType">
+				<sequence>
+					<element ref="vips:TokenId"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- MultipleTokensRequestType -->
+	<complexType abstract="true" name="MultipleTokensRequestType">
+		<annotation>
+			<documentation xml:lang="en">
+            		class for all request messages that have token id
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AccountRequestAbstractType">
+				<sequence>
+					<element maxOccurs="5" minOccurs="1" name="TokenIds" type="vips:TokenIdType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<!-- ResponseAbstractType -->
+	<complexType abstract="true" name="ResponseAbstractType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Abstract class for all responses sent by the UA Web Service.
+            		RequestId contains the Id received in the request.
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:MessageAbstractType">
+				<attribute name="RequestId" type="vips:IdType" use="optional"/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<element name="ErrorResponse" type="vips:ResponseWithStatusType"/>
+	<!-- ResponseWithStatusType -->
+	<complexType name="ResponseWithStatusType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Generic Status response for the UA Web Service.
+           		    Status Response messages also contains a status indicating success or cause of failure.
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:ResponseAbstractType">
+				<sequence>
+					<element name="Status" type="vips:StatusType"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!-- StatusType -->
+	<complexType name="StatusType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains a status code indicating success or causes of failure and
+           			also a status message that contains a brief description.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element ref="vips:ReasonCode"/>
+			<element minOccurs="0" name="StatusMessage" type="string"/>
+			<element minOccurs="0" name="ErrorDetail" type="string"/>
+		</sequence>
+	</complexType>
+	<element name="ReasonCode" type="hexBinary"/>
+	<element name="TokenStatus" type="vips:TokenStatusType"/>
+	<!-- TokenStatusType -->
+	<simpleType name="TokenStatusType">
+		<annotation>
+			<documentation xml:lang="en">
+					Can contain one of the following token status values.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="NEW"/>
+			<enumeration value="ENABLED"/>
+			<enumeration value="DISABLED"/>
+			<enumeration value="LOCKED"/>
+			<enumeration value="INACTIVE"/>
+			<enumeration value="UNKNOWN"/>
+		</restriction>
+	</simpleType>
+	<element name="TokenCategory" type="vips:TokenCategoryType"/>
+	<!-- TokenCategoryType -->
+	<simpleType name="TokenCategoryType">
+		<annotation>
+			<documentation xml:lang="en">
+					Can contain one of the following token category values.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="OATH_EVENT"/>
+			<enumeration value="VASCO_TIME"/>
+			<enumeration value="SERVER_OTP"/>
+			<enumeration value="OATH_TIME"/>
+			<enumeration value="SMS_OTP"/>
+		</restriction>
+	</simpleType>
+	<element name="TokenStatusCount" type="vips:TokenStatusCountType"/>
+	<!-- TokenStatusCountType -->
+	<complexType name="TokenStatusCountType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the counts of a tokens in a particular status.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element ref="vips:TokenStatus"/>
+			<element name="Count" type="integer"/>
+		</sequence>
+	</complexType>
+	<element name="TokenInformation" type="vips:TokenInformationType"/>
+	<!-- TokenInformationType -->
+	<complexType name="TokenInformationType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the information about a token.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element ref="vips:TokenId"/>
+			<element minOccurs="0" name="TokenKind" type="string"/>
+			<element ref="vips:Adapter"/>
+			<element ref="vips:TokenStatus"/>
+			<element name="ExpirationDate" type="dateTime"/>
+			<element minOccurs="0" name="TempPasswordExpirationDate" type="dateTime"/>
+			<element minOccurs="0" name="TempPasswordOneTimeUse" type="boolean"/>
+			<element name="LastUpdate" type="dateTime"/>
+			<element minOccurs="0" name="ServerOTPExpires" type="integer"/>
+			<element minOccurs="0" name="TokenGroupId" type="string"/>
+			<element minOccurs="0" name="Owner" type="boolean"/>
+			<element minOccurs="0" name="ReportedReason" type="vips:ReasonType"/>
+		</sequence>
+	</complexType>
+	
+	<!-- TokenInformationType -->
+	<complexType name="ChallengeResponseFormatType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains information on the challenge/response formats.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element name="ChallengeFormat" type="vips:ChallengeFormatType"/>
+			<element name="ChallengeLength" type="int"/>
+			<element name="ResponseLength" type="int"/>
+		</sequence>
+	</complexType>
+	
+	<simpleType name="ChallengeFormatType">
+		<annotation>
+			<documentation xml:lang="en">
+					Challenge format for challenge/response based authentication.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="NUMERIC"/>
+			<enumeration value="HEX"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="OCRAUsageType">
+		<restriction base="string">
+			<enumeration value="SIGNING"/>	
+		</restriction>			
+	</simpleType>	
+	
+	<element name="FeatureList" type="vips:FeatureListType"/>
+	<!-- AccountInformationType -->
+	<complexType name="FeatureListType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the information of an account.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element name="TokenShared" type="boolean"/>
+		</sequence>
+	</complexType>
+	<element name="AccountInformation" type="vips:AccountInformationType"/>
+	<!-- AccountInformationType -->
+	<complexType name="AccountInformationType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the information of an account.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element name="OrganizationName" type="string"/>
+			<element minOccurs="0" name="OrganizationUnit" type="string"/>
+			<element name="JurisdictionHash" type="string"/>
+			<element name="ServiceEndDate" type="dateTime"/>
+		</sequence>
+	</complexType>
+	<element name="Adapter" type="vips:AdapterType"/>
+	<!-- AdapterType -->
+	<simpleType name="AdapterType">
+		<annotation>
+			<documentation xml:lang="en">
+					Can contain one of the following adapter index values.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="OATH_EVENT_BASIC"/>
+			<enumeration value="OATH_EVENT_ADVANCED_1"/>
+			<enumeration value="OATH_EVENT_ADVANCED_2"/>
+			<enumeration value="VASCO_TIME"/>
+			<enumeration value="SERVER_OTP"/>
+			<enumeration value="OATH_TIME"/>
+			<enumeration value="SMS_OTP"/>
+			<enumeration value="VOICE_OTP"/>
+			<enumeration value="SECURID"/>
+			<enumeration value="OCRA"/>
+		</restriction>
+	</simpleType>
+	<element name="AdapterInfoServerOTP" type="vips:AdapterInfoServerOTPType"/>
+	<!-- AdapterInfoServerOTPType -->
+	<complexType name="AdapterInfoServerOTPType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the configuration information about the Server OTP Adapter Type.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element minOccurs="0" name="MaxFailedAttempts">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="2"/>
+						<maxInclusive value="64"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="ValidityPeriod">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="60"/>
+						<maxInclusive value="600"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="AdapterInfoSMSOTP" type="vips:AdapterInfoSMSOTPType">
+		<unique name="uniqueMessageType">
+			<selector xpath=".//vips:Message"/>
+			<field xpath="@type"/>
+		</unique>
+	</element>
+	<!-- AdapterInfoSMSOTPType -->
+	<complexType name="AdapterInfoSMSOTPType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the configuration information about the SMS OTP Adapter Type.
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AdapterInfoServerOTPType">
+				<sequence>
+					<element minOccurs="0" name="SMSFrom" type="vips:SMSFromType"/>
+					<element minOccurs="0" name="GatewayId" type="vips:GatewayIdType"/>					
+					<element minOccurs="0" name="GatewayAcctInfo" type="vips:GatewayAcctInfoType"/>
+					<element maxOccurs="100" minOccurs="0" name="Message">
+						<complexType>
+							<simpleContent>
+								<extension base="string">
+									<attribute name="type" type="vips:MessageType" use="required"/>
+								</extension>
+							</simpleContent>
+						</complexType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<simpleType name="GatewayIdType">
+		<restriction base="string">
+			<enumeration value="IMN"/>
+			<enumeration value="HKCSL"/>
+			<enumeration value="SINGTEL"/>
+			<enumeration value="TELESIGN"/>	
+			<enumeration value="DEFAULT"/>								
+		</restriction>
+	</simpleType>
+		
+	<!-- Element AdapterInfoVoiceOTP-->
+	<element name="AdapterInfoVoiceOTP" type="vips:AdapterInfoVoiceOTPType"/>
+	<!-- AdapterInfoVoiceOTPType -->
+	<complexType name="AdapterInfoVoiceOTPType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the configuration information about the Voice OTP Adapter Type.
+        		</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="vips:AdapterInfoServerOTPType">
+				<sequence/>
+			</extension>
+		</complexContent>
+	</complexType>
+	<element name="AdapterInfoEventBased" type="vips:AdapterInfoEventBasedType"/>
+	<!-- AdapterInfoEventBasedType -->
+	<complexType name="AdapterInfoEventBasedType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the configuration information about the Event based Adapter Type.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element minOccurs="0" name="MaxFailedAttempts">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="2"/>
+						<maxInclusive value="64"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="AllowGetNextOTP" type="boolean"/>
+			<element minOccurs="0" name="LookAheadWindow">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="2"/>
+						<maxInclusive value="64"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="SyncLookAheadWindow">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="4"/>
+						<maxInclusive value="1024"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="MaxGenNextOTP">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="1"/>
+						<maxInclusive value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="AutoSyncEnable" type="boolean"/>
+			<element minOccurs="0" name="AutoSyncLookAheadWindow">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="3"/>
+						<maxInclusive value="128"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="AutoSyncThreshold">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="1"/>
+						<maxInclusive value="63"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="AdapterInfoTimeBased" type="vips:AdapterInfoTimeBasedType"/>
+	<!-- AdapterInfoTimeBasedType -->
+	<complexType name="AdapterInfoTimeBasedType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the configuration information about the Time based Adapter Type.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element minOccurs="0" name="MaxFailedAttempts">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="2"/>
+						<maxInclusive value="64"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="LookAheadWindow">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="2"/>
+						<maxInclusive value="64"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="DriftTime">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="1"/>
+						<maxInclusive value="2"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="AutoSyncEnable" type="boolean"/>
+			<element minOccurs="0" name="AutoSyncLookAheadWindow">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="4"/>
+						<maxInclusive value="128"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="AutoSyncThreshold">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="1"/>
+						<maxInclusive value="63"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="AdapterInfoHOTPTimeBased" type="vips:AdapterInfoHOTPTimeBasedType"/>
+	<!-- AdapterInfoHOTPTimeBasedType -->
+	<complexType name="AdapterInfoHOTPTimeBasedType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the configuration information about the HOTP Time based Adapter Type.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element minOccurs="0" name="MaxFailedAttempts">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="2"/>
+						<maxInclusive value="64"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="ValidationRuntimeWindow">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="2"/>
+						<maxInclusive value="64"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="RunTimeSyncWindow">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="16"/>
+						<maxInclusive value="256"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="AutoSyncEnable" type="boolean"/>
+			<element minOccurs="0" name="RunTimeAutoSyncWindow">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="4"/>
+						<maxInclusive value="128"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="AutoSyncThreshold">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="1"/>
+						<maxInclusive value="63"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="SuccessiveTimeStep">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="1"/>
+						<maxInclusive value="4"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="InitialValidationWindow">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="2"/>
+						<maxInclusive value="400"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	
+	<!-- Element AdapterInfoVoiceOTP-->
+	<element name="AdapterInfoChallengeResponseBased" type="vips:AdapterInfoChallengeResponseBasedType"/>
+	<!-- AdapterInfoVoiceOTPType -->
+	<complexType name="AdapterInfoChallengeResponseBasedType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the adapter configuration for Challenge/Response base adapters.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element minOccurs="0" name="MaxFailedAttempts">
+				<simpleType>
+					<restriction base="integer">
+						<minInclusive value="2"/>
+						<maxInclusive value="64"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	
+	<!-- RequestCodeType -->
+	<simpleType name="RequestCodeType">
+		<restriction base="string">
+			<pattern value="[a-fA-F0-9,]+"/>
+		</restriction>
+	</simpleType>
+	<element name="RequestCode" type="vips:RequestCodeType"/>
+	<!-- KeyType -->
+	<simpleType name="KeyType">
+		<restriction base="string">
+			<maxLength value="32"/>
+		</restriction>
+	</simpleType>
+	<element name="Key" type="vips:KeyType"/>
+	<!-- ActivationCodeType -->
+	<simpleType name="ActivationCodeType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Maximum length of activation code restricted to 20 bytes.
+        		</documentation>
+		</annotation>
+		<restriction base="string">
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<element name="ActivationCode" type="vips:ActivationCodeType"/>
+	<element name="SecretContainer" type="vips:SecretContainerType"/>
+	<!-- SecretContainerType -->
+	<complexType name="SecretContainerType">
+		<sequence>
+			<element name="EncryptionMethod" type="vips:EncryptionMethodType"/>
+			<element maxOccurs="100" name="Device" type="vips:DeviceType"/>
+		</sequence>
+		<attribute name="Version" type="vips:VersionType" use="required"/>
+	</complexType>
+	<!-- EncryptionMethodType -->
+	<complexType name="EncryptionMethodType">
+		<sequence>
+			<element minOccurs="0" ref="vips:EncryptionAlgorithm"/>
+			<!-- Since VIPS 6.1 this element is made optional!  -->
+			<choice>
+				<element minOccurs="0" name="EncKeyLabel" type="string"/>
+				<sequence>
+					<element name="PBESalt" type="base64Binary"/>
+					<element minOccurs="0" name="PBEIterationCount" type="integer"/>
+					<element minOccurs="0" name="IV" type="base64Binary"/>
+				</sequence>
+			</choice>
+		</sequence>
+	</complexType>
+	<element name="EncryptionAlgorithm" type="vips:EncryptionAlgorithmType"/>
+	<!-- DeviceType -->
+	<complexType name="DeviceType">
+		<sequence>
+			<element name="Secret" type="vips:SecretType"/>
+		</sequence>
+	</complexType>
+	<!-- SecretType -->
+	<complexType name="SecretType">
+		<sequence>
+			<element name="Issuer" type="string"/>
+			<element name="Usage" type="vips:UsageType"/>
+			<element name="FriendlyName" type="string"/>
+			<element name="Data" type="vips:DataType"/>
+			<element name="Expiry" type="dateTime"/>
+			<element minOccurs="0" ref="vips:IssuerLogo"/>
+		</sequence>
+		<attribute name="Id" type="string" use="optional"/>
+		<attribute name="type" use="required">
+			<simpleType>
+				<restriction base="string">
+					<enumeration value="HOTP"/>
+					<enumeration value="Certificate"/>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+	<!-- UsageType -->
+	<complexType name="UsageType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Counter - is the Event counter
+            		TimeStep (X) - time step in seconds
+            		Time (T0) - UTC timestamp (number of seconds since epoch) when time step starts to count.  T0 = 0 at epoch
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element minOccurs="0" name="AI" type="vips:OtpAlgorithmIdentifierType"/>
+			<element maxOccurs="4" minOccurs="0" name="CR" type="vips:OCRASuiteType"/>
+			<element default="0" minOccurs="0" name="Counter" type="integer"/>
+			<element default="30" minOccurs="0" name="TimeStep" type="integer"/>
+			<element default="0" minOccurs="0" name="Time" type="integer"/>
+			<element default="0" minOccurs="0" name="ClockDrift" type="integer"/>
+		</sequence>
+		<attribute default="false" name="otp" type="boolean" use="optional"/>
+		<attribute default="false" name="signing" type="boolean" use="optional"/>
+	</complexType>
+	<!-- OtpAlgorithmIdentifierType -->
+	<complexType name="OtpAlgorithmIdentifierType">
+		<attribute name="type" use="required">
+			<simpleType>
+				<restriction base="string">
+					<enumeration value="HMAC-SHA1-TRUNC-6DIGITS"/>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+	
+		<complexType name="OCRASuiteType">
+			<attribute name="type" use="required">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="OCRA-1:HOTP-SHA1-6:QN06"/>
+						<enumeration value="OCRA-1:HOTP-SHA1-8:QN06"/>
+						<enumeration value="OCRA-1:HOTP-SHA1-6:QN08"/>
+						<enumeration value="OCRA-1:HOTP-SHA1-8:QN08"/>
+						<enumeration value="OCRA-1:HOTP-SHA1-6:QH40"/>
+						<enumeration value="OCRA-1:HOTP-SHA1-8:QH40"/>			
+					</restriction>	
+				</simpleType>
+			</attribute>						
+		</complexType>
+	
+	<!-- DataType -->
+	<complexType name="DataType">
+		<sequence>
+			<element name="Cipher" type="base64Binary"/>
+			<element minOccurs="0" name="Digest" type="vips:DigestType"/>
+		</sequence>
+	</complexType>
+	<!-- DigestType -->
+	<complexType name="DigestType">
+		<simpleContent>
+			<extension base="base64Binary">
+				<attribute name="algorithm" use="required">
+					<simpleType>
+						<restriction base="string">
+							<enumeration value="HMAC-SHA1"/>
+							<enumeration value="HMAC-SHA256"/>
+							<enumeration value="HMAC-SHA512"/>
+						</restriction>
+					</simpleType>
+				</attribute>
+			</extension>
+		</simpleContent>
+	</complexType>
+	<element name="IssuerLogo" type="vips:LogoType"/>
+	<!-- LogoType -->
+	<complexType name="LogoType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Type to carry a logo image. Includes a mime-type to indicate the content type for the image.
+        		</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="base64Binary">
+				<attribute name="MimeType" type="vips:MimeTypeType" use="required"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+	<!-- MimeTypeType -->
+	<simpleType name="MimeTypeType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Can be one of the following supported image content types.
+        		</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="image/gif"/>
+			<enumeration value="image/jpeg"/>
+			<enumeration value="image/png"/>
+		</restriction>
+	</simpleType>
+	<!-- Issuer part of the spec -->
+	<element name="TokenId" type="vips:TokenIdType"/>
+	<!-- TokenIdType -->
+	<complexType name="TokenIdType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Token identifier. Limited to 40 bytes including the 4 byte token-prefix.
+        		</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="string">
+				<attribute name="type" type="vips:TokenType" use="optional"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+	
+	<simpleType name="TokenType">
+		<restriction base="string">
+			<enumeration value="SMS"/>
+			<enumeration value="Voice"/>
+			<enumeration value="Service"/>
+		</restriction>
+	</simpleType>
+	
+	<!-- OTPType -->
+	<simpleType name="OTPType">
+		<annotation>
+			<documentation xml:lang="en">
+            		One Time Password. Between 6 to 10 bytes.
+        		</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="[a-zA-Z0-9]{6,10}"/>
+		</restriction>
+	</simpleType>
+	<!-- TxnOTPType -->
+	<simpleType name="TxnOTPType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Txn OTP. Between 4 to 10 digits.
+        		</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="[0-9]{4,10}"/>
+		</restriction>
+	</simpleType>
+
+	<!-- Numeric Challenge type -->
+	<simpleType name="NumericChallengeType">
+		<annotation>
+			<documentation xml:lang="en">
+				Numeric challenge for OCRA type of authentication.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="[0-9]{6,10}"/>
+		</restriction>
+	</simpleType>
+	<!-- Hex Challenge type -->
+	<simpleType name="HexChallengeType">
+		<annotation>
+			<documentation xml:lang="en">
+				Hex challenge for OCRA type of authentication.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="[a-fA-F0-9]{40}"/>
+		</restriction>
+	</simpleType>
+		
+	<!-- TempPwdType -->
+	<simpleType name="TempPwdType">
+		<annotation>
+			<documentation xml:lang="en">
+            		One Time Password. Limited to 6 bytes.
+        		</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="[a-zA-Z0-9]{0,6}"/>
+		</restriction>
+	</simpleType>
+	<!-- OTPIndexType -->
+	<complexType name="OTPIndexType">
+		<sequence>
+			<element name="Index" type="integer"/>
+			<element name="OTP" type="vips:OTPType"/>
+		</sequence>
+	</complexType>
+	<element name="ACProfile" type="vips:ACProfileType"/>
+	<!-- ACProfileType -->
+	<simpleType name="ACProfileType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Can contain one of the following profile values.           	    	
+       		</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="MOBILEPHONE"/>
+			<enumeration value="COMPUTER"/>
+			<enumeration value="BREW"/>
+			<enumeration value="MOBILE_NUMERIC_MEDIUM"/>
+		</restriction>
+	</simpleType>
+	<element name="TokenModel" type="vips:TokenModelType"/>
+	<complexType name="DeviceIdType">
+		<sequence>
+			<element minOccurs="0" name="Manufacturer">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="SerialNo">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="Model">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="IssueNo">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="Expiry">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- Abstract extension type -->
+	<complexType abstract="true" name="AbstractExtensionType">
+		<attribute name="extVersion" type="string"/>
+	</complexType>	
+	<!--BrandInfoType-->
+	<complexType name="BrandInfoType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the branding information.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element name="Name" type="string"/>
+			<element minOccurs="0" name="PrefixURL" type="string"/>
+		</sequence>
+	</complexType>
+	<!--DeliveryInfoForVendorType-->
+	<element abstract="true" name="DeliveryInfoForVendor" type="vips:DeliveryInfoForVendorType"/>
+	<complexType name="DeliveryInfoForVendorType"/>
+	<!--VoiceDeliveryInfoType-->
+	<complexType name="VoiceDeliveryInfoType">
+		<annotation>
+			<documentation xml:lang="en">Contains the elements for voice type</documentation>
+		</annotation>
+		<sequence>
+			<element ref="vips:DeliveryInfoForVendor"/>
+		</sequence>
+	</complexType>
+	<!--AuthentifyType-->
+	<element name="AuthentifyVoiceDeliveryInfo" substitutionGroup="vips:DeliveryInfoForVendor" type="vips:AuthentifyVoiceDeliveryInfoType"/>
+	<complexType name="AuthentifyVoiceDeliveryInfoType">
+		<complexContent>
+			<extension base="vips:DeliveryInfoForVendorType">
+				<sequence minOccurs="0">
+					<element minOccurs="0" name="Account" type="vips:AccountType"/>
+					<element minOccurs="0" name="Language" type="language"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<!--AccountType-->
+	<simpleType name="AccountType">
+		<restriction base="string">
+			<maxLength value="32"/>
+		</restriction>
+	</simpleType>
+	<!--SMSDeliveryInfoType-->
+	<complexType name="SMSDeliveryInfoType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the branding information.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element minOccurs="0" name="SMSFrom" type="vips:SMSFromType"/>
+			<!--  Message length check is done in the code to keep consistent with get/setAdapter for SMS  -->
+			<element minOccurs="0" name="Message" type="string"/>
+		</sequence>
+	</complexType>
+	<!--GatewayAcctInfo-->
+	<complexType name="GatewayAcctInfoType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the IMN gateway account information.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element name="Id">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="15"/>
+						<pattern value="[a-zA-Z0-9]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="Password">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="64"/>
+						<pattern value="[a-zA-Z0-9]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- TokenModelType -->
+	<simpleType name="TokenModelType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Four letter prefix in the token-id.
+        		</documentation>
+		</annotation>
+		<restriction base="string">
+			<minLength value="4"/>
+			<maxLength value="4"/>
+		</restriction>
+	</simpleType>
+	<element name="SharedSecretDeliveryMethod" type="vips:SharedSecretDeliveryMethodType"/>
+	<!-- SharedSecretDeliveryMethodType -->
+	<simpleType name="SharedSecretDeliveryMethodType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Can be one of the following transports.
+        		</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="HTTPS"/>
+			<enumeration value="SMS"/>
+		</restriction>
+	</simpleType>
+	<element name="SupportedEncryptionAlgorithm" type="vips:EncryptionAlgorithmType"/>
+	<!-- EncryptionAlgorithmType -->
+	<simpleType name="EncryptionAlgorithmType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Can be one of the following supported encryption algorithms.
+        		</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="NONE"/>
+			<enumeration value="PBE-3DES112-CBC"/>
+			<enumeration value="PBE-3DES168-CBC"/>
+			<enumeration value="PBE-AES128-CBC"/>
+			<enumeration value="AES128-CTR"/>
+			<enumeration value="AES128-CBC"/>
+			<enumeration value="RSA"/>
+		</restriction>
+	</simpleType>
+	<element name="ActivationCodeStatus" type="vips:ActivationCodeStatusType"/>
+	<!--ActivationCodeStatusType -->
+	<simpleType name="ActivationCodeStatusType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Activation Code status. Can take one of the following values.
+        		</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="NEW"/>
+			<enumeration value="PROVISIONED"/>
+			<enumeration value="DISABLED"/>
+			<enumeration value="EXPIRED"/>
+		</restriction>
+	</simpleType>
+	<element name="Reason" type="vips:ReasonType"/>
+	<simpleType name="ReasonType">
+		<annotation>
+			<documentation xml:lang="en">
+					Can contain one of the following reason code values.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Unspecified"/>
+			<enumeration value="Stolen"/>
+			<enumeration value="Lost"/>
+			<enumeration value="Canceled"/>
+			<enumeration value="Returned"/>
+			<enumeration value="TemporarilyUnavailable"/>
+			<enumeration value="Expired"/>
+			<enumeration value="DeactivatedAsPerUnusedPolicy"/>
+		</restriction>
+	</simpleType>
+	<element name="NetworkIntelligence" type="vips:NetworkIntelligenceType"/>
+	<!-- NetworkIntelligenceType -->
+	<complexType name="NetworkIntelligenceType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Contains the network intelligence information for a specific token.
+        		</documentation>
+		</annotation>
+		<sequence>
+			<element name="NumberOfParties" type="unsignedShort"/>
+			<element maxOccurs="5" minOccurs="0" name="TokenState">
+				<complexType>
+					<sequence>
+						<element name="Total" type="int"/>
+						<element maxOccurs="100" minOccurs="0" name="Reason">
+							<complexType>
+								<simpleContent>
+									<extension base="int">
+										<attribute name="type" type="vips:ReasonType" use="required"/>
+									</extension>
+								</simpleContent>
+							</complexType>
+						</element>
+					</sequence>
+					<attribute name="type" type="vips:TokenStatusType" use="required"/>
+				</complexType>
+				<unique name="uniqueReasonType">
+					<selector xpath=".//vips:Reason"/>
+					<field xpath="@type"/>
+				</unique>
+			</element>
+			<element name="GlobalFailureCount" type="unsignedShort"/>
+		</sequence>
+	</complexType>
+	<simpleType name="MessageType">
+		<annotation>
+			<documentation xml:lang="en">
+					Can contain one of the following message values.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="REGISTER"/>
+			<enumeration value="SERVICE"/>
+			<enumeration value="TEMP_PASSWORD"/>
+			<enumeration value="PIN_DELIVERY"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="PhoneNumberType">
+        <restriction base="string">
+            <pattern value="[0-9]{5,20}(x[0-9,#.*]{1,20})?"/>
+        </restriction>
+	</simpleType>	
+	<simpleType name="SMSFromType">
+		<restriction base="string">
+			<pattern value="[0-9]{3,20}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="GatewayResponseType">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="50"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SMSOperationType">
+		<annotation>
+			<documentation xml:lang="en">
+					Can contain one of the following message values.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="REGISTER"/>
+			<enumeration value="SEND_MESSAGE"/>
+			<enumeration value="PASS_THROUGH"/>
+		</restriction>
+	</simpleType>
+	<complexType name="NameValuePairType">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="name" type="string" use="required"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+	<!-- DestinationType -->
+	<complexType name="DestinationType">
+		<annotation>
+			<documentation xml:lang="en">
+            		Destination type
+        		</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="string">
+				<attribute name="type" type="vips:TokenType" use="required"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+	<!-- Language - Specified in APIs like VerifyTxn. -->
+	<simpleType name="LanguageType">
+		<annotation>
+			<documentation xml:lang="en">
+				Used to specify the language in APIs used to send voice message or OTP.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="[a-zA-Z\-]{2,10}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="TemplateNameType">
+		<annotation>
+			<documentation xml:lang="en">
+				Used to specify the template that needs to be used to make the voice call.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<minLength value="4"/>
+			<maxLength value="25"/>
+		</restriction>
+	</simpleType>
+	<!-- TrackingId - Used in APIs like VerifyTxn. -->
+	<simpleType name="TxnIdType">
+		<annotation>
+			<documentation xml:lang="en">
+				Sent as a part of a submit transaction verification response. This tracking Id can be 
+				used in subsequent polling requests to find the status of the voice call.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="[a-zA-Z0-9]{6,16}"/>
+		</restriction>
+	</simpleType>
+	
+	<!--  VIP Server Info -->
+    <element name="ServerInfo" type="vips:ServerInfoType"/>
+
+    <complexType name="ServerInfoType">
+        <sequence>
+                <element name="CurrentTime" type="long"/>
+        </sequence>
+    </complexType>
+
+	<element name="FormFactor" type="vips:FormFactorType"/>
+	<simpleType final="restriction" name="FormFactorType">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="64"/>
+		</restriction>
+	</simpleType>
+
+	<element name="MovingFactor" type="vips:MovingFactorType"/>
+	<simpleType final="restriction" name="MovingFactorType">
+		<restriction base="string">
+			<enumeration value="NONE"/>
+			<enumeration value="TIME"/>
+			<enumeration value="EVENT"/>
+		</restriction>
+	</simpleType>
+
+	<element name="OtpGeneratedBy" type="vips:OtpGeneratedByType"/>
+	<simpleType final="restriction" name="OtpGeneratedByType">
+		<restriction base="string">
+			<enumeration value="HARDWARE"/>
+			<enumeration value="SOFTWARE"/>
+			<enumeration value="SERVER"/>
+		</restriction>
+	</simpleType>
+
+	<element name="TokenCategoryDetails" type="vips:TokenCategoryDetailsType"/>
+
+	<complexType name="TokenCategoryDetailsType">
+		<sequence>
+			<element minOccurs="1" name="CategoryId" type="integer"/>
+			<element minOccurs="1" name="FormFactor" type="vips:FormFactorType"/>
+			<element minOccurs="1" name="MovingFactor" type="vips:MovingFactorType"/>
+			<element minOccurs="1" name="OtpGeneratedBy" type="vips:OtpGeneratedByType"/>
+		</sequence>
+	</complexType>
+</schema>

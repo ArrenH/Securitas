@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:vipusmgmt="https://schemas.symantec.com/vip/2011/04/vipuserservices/mgmt" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:vipus="https://schemas.symantec.com/vip/2011/04/vipuserservices" name="VIPUserServices" targetNamespace="https://schemas.symantec.com/vip/2011/04/vipuserservices/mgmt">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="https://schemas.symantec.com/vip/2011/04/vipuserservices" schemaLocation="vipuserservices-1.7.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="CreateUserRequest">
+		<wsdl:part name="CreateUserRequest" element="vipus:CreateUserRequest"/>
+	</wsdl:message>
+	<wsdl:message name="CreateUserResponse">
+		<wsdl:part name="CreateUserResponse" element="vipus:CreateUserResponse"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateUserRequest">
+		<wsdl:part name="UpdateUserRequest" element="vipus:UpdateUserRequest"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateUserResponse">
+		<wsdl:part name="UpdateUserResponse" element="vipus:UpdateUserResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteUserRequest">
+		<wsdl:part name="DeleteUserRequest" element="vipus:DeleteUserRequest"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteUserResponse">
+		<wsdl:part name="DeleteUserResponse" element="vipus:DeleteUserResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ClearUserPinRequest">
+		<wsdl:part name="ClearUserPinRequest" element="vipus:ClearUserPinRequest"/>
+	</wsdl:message>
+	<wsdl:message name="ClearUserPinResponse">
+		<wsdl:part name="ClearUserPinResponse" element="vipus:ClearUserPinResponse"/>
+	</wsdl:message>	
+	<wsdl:message name="AddCredentialRequest">
+		<wsdl:part name="AddCredentialRequest" element="vipus:AddCredentialRequest"/>
+	</wsdl:message>
+	<wsdl:message name="AddCredentialResponse">
+		<wsdl:part name="AddCredentialResponse" element="vipus:AddCredentialResponse"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateCredentialRequest">
+		<wsdl:part name="UpdateCredentialRequest" element="vipus:UpdateCredentialRequest"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateCredentialResponse">
+		<wsdl:part name="UpdateCredentialResponse" element="vipus:UpdateCredentialResponse"/>
+	</wsdl:message>
+	<wsdl:message name="RemoveCredentialRequest">
+		<wsdl:part name="RemoveCredentialRequest" element="vipus:RemoveCredentialRequest"/>
+	</wsdl:message>
+	<wsdl:message name="RemoveCredentialResponse">
+		<wsdl:part name="RemoveCredentialResponse" element="vipus:RemoveCredentialResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SetTemporaryPasswordRequest">
+		<wsdl:part name="SetTemporaryPasswordRequest" element="vipus:SetTemporaryPasswordRequest"/>
+	</wsdl:message>
+	<wsdl:message name="SetTemporaryPasswordResponse">
+		<wsdl:part name="SetTemporaryPasswordResponse" element="vipus:SetTemporaryPasswordResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ClearTemporaryPasswordRequest">
+		<wsdl:part name="ClearTemporaryPasswordRequest" element="vipus:ClearTemporaryPasswordRequest"/>
+	</wsdl:message>
+	<wsdl:message name="ClearTemporaryPasswordResponse">
+		<wsdl:part name="ClearTemporaryPasswordResponse" element="vipus:ClearTemporaryPasswordResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SetTemporaryPasswordAttributesRequest">
+		<wsdl:part name="SetTemporaryPasswordAttributesRequest" element="vipus:SetTemporaryPasswordAttributesRequest"/>
+	</wsdl:message>
+	<wsdl:message name="SetTemporaryPasswordAttributesResponse">
+		<wsdl:part name="SetTemporaryPasswordAttributesResponse" element="vipus:SetTemporaryPasswordAttributesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SendOtpRequest">
+		<wsdl:part name="SendOtpRequest" element="vipus:SendOtpRequest"/>
+	</wsdl:message>
+	<wsdl:message name="SendOtpResponse">
+		<wsdl:part name="SendOtpResponse" element="vipus:SendOtpResponse"/>
+	</wsdl:message>
+	<wsdl:message name="RegisterRequest">
+		<wsdl:part name="RegisterRequest" element="vipus:RegisterRequest"/>
+	</wsdl:message>
+	<wsdl:message name="RegisterResponse">
+		<wsdl:part name="RegisterResponse" element="vipus:RegisterResponse"/>
+	</wsdl:message>	
+	<wsdl:portType name="ManagementServicePort">
+		<wsdl:operation name="createUser">
+			<wsdl:input message="vipusmgmt:CreateUserRequest"/>
+			<wsdl:output message="vipusmgmt:CreateUserResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateUser">
+			<wsdl:input message="vipusmgmt:UpdateUserRequest"/>
+			<wsdl:output message="vipusmgmt:UpdateUserResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="deleteUser">
+			<wsdl:input message="vipusmgmt:DeleteUserRequest"/>
+			<wsdl:output message="vipusmgmt:DeleteUserResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="clearUserPin">
+			<wsdl:input message="vipusmgmt:ClearUserPinRequest"/>
+			<wsdl:output message="vipusmgmt:ClearUserPinResponse"/>
+		</wsdl:operation>		
+		<wsdl:operation name="addCredential">
+			<wsdl:input message="vipusmgmt:AddCredentialRequest"/>
+			<wsdl:output message="vipusmgmt:AddCredentialResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateCredential">
+			<wsdl:input message="vipusmgmt:UpdateCredentialRequest"/>
+			<wsdl:output message="vipusmgmt:UpdateCredentialResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeCredential">
+			<wsdl:input message="vipusmgmt:RemoveCredentialRequest"/>
+			<wsdl:output message="vipusmgmt:RemoveCredentialResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="setTemporaryPassword">
+			<wsdl:input message="vipusmgmt:SetTemporaryPasswordRequest"/>
+			<wsdl:output message="vipusmgmt:SetTemporaryPasswordResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="clearTemporaryPassword">
+			<wsdl:input message="vipusmgmt:ClearTemporaryPasswordRequest"/>
+			<wsdl:output message="vipusmgmt:ClearTemporaryPasswordResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="setTemporaryPasswordAttributes">
+			<wsdl:input message="vipusmgmt:SetTemporaryPasswordAttributesRequest"/>
+			<wsdl:output message="vipusmgmt:SetTemporaryPasswordAttributesResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="sendOtp">
+			<wsdl:input message="vipusmgmt:SendOtpRequest"/>
+			<wsdl:output message="vipusmgmt:SendOtpResponse"/>
+		</wsdl:operation>	
+		<wsdl:operation name="register">
+			<wsdl:input message="vipusmgmt:RegisterRequest"/>
+			<wsdl:output message="vipusmgmt:RegisterResponse"/>
+		</wsdl:operation>			
+	</wsdl:portType>
+	<wsdl:binding name="ManagementServiceSoapBinding" type="vipusmgmt:ManagementServicePort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="createUser">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateUser">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteUser">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="clearUserPin">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>		
+		<wsdl:operation name="addCredential">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateCredential">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="removeCredential">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setTemporaryPassword">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="clearTemporaryPassword">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="setTemporaryPasswordAttributes">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="sendOtp">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="register">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</wsdl:output>
+		</wsdl:operation>				
+	</wsdl:binding>
+	<wsdl:service name="ManagementService">
+		<wsdl:port name="ManagementServicePort" binding="vipusmgmt:ManagementServiceSoapBinding">
+			<soap:address location="https://userservices-auth.vip.symantec.com/vipuserservices/ManagementService_1_7"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
