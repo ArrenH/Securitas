@@ -14,7 +14,14 @@ from symantec_package.HTTPHandler import setConnection, HTTPSClientAuthHandler, 
 class TestUserManagement(unittest.TestCase):
     def setUp(self):
         # the URLs for now which will have the WSDL files and the XSD file
-        managementservices_url = 'http://webdev.cse.msu.edu/~huynhall/vipuserservices-mgmt-1.7.wsdl'
+        import urllib
+        import os
+        from urllib.parse import urlparse
+        from urllib.request import pathname2url
+
+        managementservices_url = urllib.parse.urljoin('file:', pathname2url(
+            os.path.abspath('../wsdl_files/vipuserservices-mgmt-1.7.wsdl')))
+        # managementservices_url = 'http://webdev.cse.msu.edu/~huynhall/vipuserservices-mgmt-1.7.wsdl'
 
         # initializing the Suds clients for each url, with the client certificate youll have in the same dir as this file
         self.management_client = Client(managementservices_url,

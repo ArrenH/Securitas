@@ -8,8 +8,14 @@ from unittest.mock import Mock, patch
 class TestAuthentication(unittest.TestCase):
     def setUp(self):
         # the URLs for now which will have the WSDL files and the XSD file
-        query_services_url = 'http://webdev.cse.msu.edu/~yehanlin/vip/vipuserservices-query-1.7.wsdl'
-        userservices_url = 'http://webdev.cse.msu.edu/~morcoteg/Symantec/WSDL/vipuserservices-auth-1.7.wsdl'
+        #urlparse.urljoin('file:', urllib.pathname2url(os.path.abspath("service.xml")))
+        import urllib
+        import os
+        from urllib.parse import urlparse
+        from urllib.request import pathname2url
+
+        query_services_url = urllib.parse.urljoin('file:', pathname2url(os.path.abspath('../wsdl_files/vipuserservices-query-1.7.wsdl')))
+        userservices_url = urllib.parse.urljoin('file:', pathname2url(os.path.abspath('../wsdl_files/vipuserservices-auth-1.7.wsdl')))
 
         # initializing the Suds clients for each url, with the client certificate youll have in the same dir as this file
         query_services_client = Client(query_services_url,
