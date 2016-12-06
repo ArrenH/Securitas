@@ -62,7 +62,7 @@ send_push_to_phone_result = test_user_services_object.authenticateUserWithPush("
 
 ## Documentation
 
-< Need to provide link once published! >
+https://arrenh.github.io/Securitas/
 
 ## Contributing
 

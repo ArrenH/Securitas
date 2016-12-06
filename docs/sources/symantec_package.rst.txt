@@ -19,14 +19,6 @@ symantec_package.HTTPHandler module
     :undoc-members:
     :show-inheritance:
 
-symantec_package.soap-play module
----------------------------------
-
-.. automodule:: symantec_package.soap-play
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------

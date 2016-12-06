@@ -1,5 +1,5 @@
-symantec_package
-================
+Securitas_new
+=============
 
 .. toctree::
    :maxdepth: 4

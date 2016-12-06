@@ -1,10 +1,10 @@
-.. Symantec VIP Python documentation master file, created by
-   sphinx-quickstart on Tue Oct 25 19:34:43 2016.
+.. Symantec VIP Python SDK documentation master file, created by
+   sphinx-quickstart on Tue Dec  6 00:52:33 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Symantec VIP Python's documentation!
-===============================================
+Welcome to Symantec VIP Python SDK's documentation!
+===================================================
 
 .. toctree::
    :maxdepth: 2
