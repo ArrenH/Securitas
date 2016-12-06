@@ -40,7 +40,15 @@ Once the certificate is split, Securitas is simple to start using.
 from suds.client import Client
 from symantec_package.lib.userService.SymantecUserServices import SymantecUserServices
 
+# METHOD #1 for URL from web host
 userservices_url = 'http://somelocation.io/vipuserservices-auth-1.7.wsdl'
+# METHOD #2 for URL from local directory
+import urllib
+import os
+from urllib.parse import urlparse
+from urllib.request import pathname2url
+userservices_url = urllib.parse.urljoin('file:', pathname2url(os.path.abspath('../wsdl_files/vipuserservices-auth-1.7.wsdl')))
+
 user_services_client = Client(userservices_url,
       transport = HTTPSClientCertTransport( '../privateKey_nopass.pem', '../publicCert.pem'))
 
