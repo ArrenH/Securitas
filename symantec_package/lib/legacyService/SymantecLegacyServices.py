@@ -6,6 +6,17 @@
 .. moduleauthor:: Allen Huynh
 
 """
+from suds.plugin import MessagePlugin
+from suds.client import Client
+from symantec_package.HTTPHandler import HTTPSClientCertTransport
+
+class MyPlugin(MessagePlugin):
+    def marshalled(self, context):
+        body = context.envelope.getChild('Body')
+        foo = body[0]
+        foo.set('Version', '3.1')
+        foo.set('Id', '123abc')
+
 
 class SymantecLegacyServices:
     """This class acts as a layer of abstraction to handling Symantec VIP SOAP calls in Python.
@@ -23,7 +34,7 @@ class SymantecLegacyServices:
 
     """
 
-    def __init__(self, client):
+    def __init__(self):
         """The class takes in only a SOAP client object.
 
             Arg:
@@ -33,21 +44,124 @@ class SymantecLegacyServices:
                 Any parameters that are of "None" type are optional fields.
 
         """
-        self.client = client
+        self.legacyservices_url = 'http://webdev.cse.msu.edu/~huynhall/vip_auth.wsdl'
+        self.client = Client(self.legacyservices_url, location="https://services-auth.vip.symantec.com/mgmt/soap",
+                             plugins=[MyPlugin()],
+                               transport=HTTPSClientCertTransport('vip_certificate.crt', 'vip_certificate.crt'))
+        self.provision_client = Client(self.legacyservices_url, location="https://services-auth.vip.symantec.com/prov/soap",
+                             plugins=[MyPlugin()],
+                               transport=HTTPSClientCertTransport('vip_certificate.crt', 'vip_certificate.crt'))
+        self.validate_client = Client(self.legacyservices_url,
+                                       location="https://services-auth.vip.symantec.com/val/soap",
+                                       plugins=[MyPlugin()],
+                                       transport=HTTPSClientCertTransport('vip_certificate.crt', 'vip_certificate.crt'))
+
         self.response = None
 
-    # DEPRECATED and NOT SUPPORTED with xlmns envelope
+
+
+    ####### DONE #################
     def setTemporaryPassword(self, credentialId, password, expirationDate=None, oneTimeUseOnly=None):
-        id = self.client.factory.create("ns0:TokenIdType")
+        fn = self.client.factory.create("SetTemporaryPasswordType")
+        id = self.client.factory.create("TokenIdType")
         id.value = credentialId
         id._type = "SMS"
-        res = self.client.service.setTemporaryPassword(TokenId=id, TemporaryPassword=password, ExpirationDate=
+
+        res = self.client.service.SetTemporaryPassword(TokenId=id, TemporaryPassword=password, ExpirationDate=
                                                        expirationDate, OneTimeUseOnly=oneTimeUseOnly)
         self.response = res
         return res
 
-    #DEPRECATED and NOT SUPPORTED with xlmns envelope
-    def sendOtpSmsUsingCredentialId(self, credentialId, authorizerAccountId=None,SMSFrom=None, message=None):
+
+    def enableCredentialSMS(self, credentialId, otp1=None, otp2=None, authorizerAccountId=None):
+        id = self.client.factory.create("ns0:TokenIdType")
+        id.value = credentialId
+        id._type = "SMS"
+        res = self.client.service.EnableToken(AuthorizerAccountId=authorizerAccountId, TokenId=id)
+        self.response = res
+        return res
+
+    def disableCredentialSMS(self, credentialId, reason=None, authorizerAccountId=None):
+        id = self.client.factory.create("ns0:TokenIdType")
+        id.value = credentialId
+        id._type = "SMS"
+        res = self.client.service.DisableToken(AuthorizerAccountId=authorizerAccountId, TokenId=id, Reason=reason)
+        self.response = res
+        return self.response
+
+    def registerSMSCredential(self, credentialId, DeliverOTP=None):
+        id = self.provision_client.factory.create("TokenIdType")
+        id.value = credentialId
+        id._type = "SMS"
+
+        res = self.provision_client.service.Register(TokenId=id, DeliverOTP=DeliverOTP)
+        self.response = res
+        return res
+
+    def activateCredentialSMS(self, credentialId, otp1=None, otp2=None, authorizerAccountId=None):
+        id = self.client.factory.create("ns0:TokenIdType")
+        id.value = credentialId
+        id._type = "SMS"
+        res = self.client.service.ActivateToken(AuthorizerAccountId=authorizerAccountId, TokenId=id, OTP1=otp1,
+                                                OTP2=otp2)
+        self.response = res
+        return self.response
+
+    def deactivateCredentialSMS(self, credentialId, reason=None, authorizerAccountId=None):
+        id = self.client.factory.create("ns0:TokenIdType")
+        id.value = credentialId
+        id._type = "SMS"
+        res = self.client.service.DeactivateToken(AuthorizerAccountId=authorizerAccountId, TokenId=id,
+                                                  Reason=reason)
+        self.response = res
+        return self.response
+
+
+
+    #############################
+
+
+
+    ######  NOT   DONE  #####################
+
+    # not working correctly, try in SOAP PLAY, some weird prefix gets added to the type attribute...
+    def validateSMSSecurityCode(self, credentialId, otp):
+        id = self.client.factory.create("TokenIdType")
+        id.value = credentialId
+        id._type = "SMS"
+
+        res = self.validate_client.service.Validate(TokenId=id, OTP=otp)
+        self.response = res
+        return self.response
+
+    # not working correctly      THIS ONE IS HUGE WE NEED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    def sendTemporaryPassword(self, credentialId, phoneNumber, expirationDate=None):
+        id = self.client.factory.create("ns0:TokenIdType")
+        id.value = credentialId
+        id._type = "SMS"
+        res = self.client.service.SendTemporaryPassword(TokenId=id, PhoneNumber=phoneNumber, ExpirationDate=
+        expirationDate)
+        self.response = res
+        return res
+
+    # not working correctly
+    def unlockToken(self, credentialId, authorizerAccountId=None):
+        id = self.client.factory.create("TokenIdType")
+        id.value = credentialId
+        id._type = "SMS"
+
+        res = self.client.service.UnlockToken(TokenId=credentialId, AuthorizerAccountId=authorizerAccountId)
+        self.response = res
+        return res
+
+
+
+
+
+######################## DEPRECATED?  ##################################################################################
+
+    # DEPRECATED and NOT SUPPORTED with xlmns envelope
+    def sendOtpSmsUsingCredentialId(self, credentialId, authorizerAccountId=None, SMSFrom=None, message=None):
         id = self.client.factory.create("ns0:TokenIdType")
         id.value = credentialId
         id._type = "SMS"
@@ -62,45 +176,13 @@ class SymantecLegacyServices:
                                               SMSDeliveryInfo={"SMSFrom": SMSFrom}, VoiceDeliveryInfo=None)
         else:
             res = self.client.service.SendOtp(AuthorizerAccountId=authorizerAccountId, TokenId=id,
-                                              SMSDeliveryInfo={"SMSFrom": SMSFrom, "Message":message}, VoiceDeliveryInfo=None)
+                                              SMSDeliveryInfo={"SMSFrom": SMSFrom, "Message": message},
+                                              VoiceDeliveryInfo=None)
         self.response = res
         return res
+########################  ?  ##################################################################################
 
-    # DEPRECATED and NOT SUPPORTED with xlmns envelope
-    def enableCredentialSMS(self, credentialId, otp1=None, otp2=None, authorizerAccountId=None):
-        id = self.client.factory.create("ns0:TokenIdType")
-        id.value = credentialId
-        id._type = "SMS"
-        res = self.client.service.EnableToken(AuthorizerAccountId=authorizerAccountId, TokenId=id, OTP1=otp1, OTP2=otp2)
-        self.response = res
-        return res
 
-    # DEPRECATED and NOT SUPPORTED with xlmns envelope
-    def activateCredentialSMS(self, credentialId, otp1=None, otp2=None, authorizerAccountId=None):
-        id = self.client.factory.create("ns0:TokenIdType")
-        id.value = credentialId
-        id._type = "SMS"
-        res = self.client.service.ActivateToken(AuthorizerAccountId=authorizerAccountId, TokenId=id, OTP1=otp1,OTP2=otp2)
-        self.response = res
-        return self.response
-
-    # DEPRECATED and NOT SUPPORTED with xlmns envelope
-    def disableCredentialSMS(self, credentialId, reason=None, authorizerAccountId=None):
-        id = self.client.factory.create("ns0:TokenIdType")
-        id.value = credentialId
-        id._type = "SMS"
-        res = self.client.service.DisableToken(AuthorizerAccountId=authorizerAccountId, TokenId=id, Reason=reason)
-        self.response = res
-        return self.response
-
-    # DEPRECATED and NOT SUPPORTED with xlmns envelope
-    def deactivateCredentialSMS(self, credentialId, reason=None, authorizerAccountId=None):
-        id = self.client.factory.create("ns0:TokenIdType")
-        id.value = credentialId
-        id._type = "SMS"
-        res = self.client.service.DeactivateToken(AuthorizerAccountId=authorizerAccountId, TokenId=id, Reason=reason)
-        self.response = res
-        return self.response
 
     def getFieldContent(self, fieldname):
         """
