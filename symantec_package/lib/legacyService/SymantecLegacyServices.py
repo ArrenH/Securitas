@@ -3,7 +3,7 @@
     :platform: All platforms that are compatible with Python framework
     :synopsis: Module handles other useful VIP SOAP calls
 
-.. moduleauthor:: Allen Huynh
+.. moduleauthor:: Allen Huynh & Gabriel Morcote
 
 """
 from suds.plugin import MessagePlugin
@@ -11,7 +11,16 @@ from suds.client import Client
 from symantec_package.HTTPHandler import HTTPSClientCertTransport
 
 class MyPlugin(MessagePlugin):
+    """This class acts as a plugin to add in XML attributes into legacy client in order to get it working. """
     def marshalled(self, context):
+        """
+            :description: *Adds in XML attributes*
+            :param context: Context body where the plugin will add the XML attributes to get this legacy class working
+            :type context:
+            :returns:  nothing
+            :raises:
+
+        """
         body = context.envelope.getChild('Body')
         foo = body[0]
         foo.set('Version', '3.1')
@@ -62,6 +71,21 @@ class SymantecLegacyServices:
 
     ####### DONE #################
     def setTemporaryPassword(self, credentialId, password, expirationDate=None, oneTimeUseOnly=None):
+        """
+            :description: *Use the SetTemporaryPassword API to set a temporary security code for a credential. You can optionally set an expiration date for the security code, or set it for one-time use only. The request requires the credential ID and the temporary security code string. You can also use the SetTemporaryPassword API to clear a temporary security code. To clear the temporary security code, send the SetTemporaryPassword API and leave the TemporaryPassword request parameter empty.*
+            :note: The SetTemporaryPassword API works on both Disabled and Enabled credentials. Check the credential state before issuing a temporary security code. Checking the credential state prevents users from trying to authenticate using disabled credentials.
+            :param credentialId: The token ID (credential ID) identifies the credential to the VIP Service Web Services.
+            :type credentialId: string
+            :param password: The temporary security code is either empty or six numeric characters.
+            :type password: string
+            :param expirationDate: The temporary security code expiration date (maximum of 30 days). If no date is provided, the default expiration period set for your account in VIP Manager is used to calculate the security code expiration.
+            :type expirationDate: datetime
+            :param oneTimeUseOnly: If this field is set to “true,” the temporary security code expires after one use, or at the expiration date. The default value is “false.”
+            :type oneTimeUseOnly: boolean
+            :returns:  the return SOAP response.
+            :raises:
+
+        """
         fn = self.client.factory.create("SetTemporaryPasswordType")
         id = self.client.factory.create("TokenIdType")
         id.value = credentialId
@@ -73,7 +97,17 @@ class SymantecLegacyServices:
         return res
 
 
-    def enableCredentialSMS(self, credentialId, otp1=None, otp2=None, authorizerAccountId=None):
+    def enableCredentialSMS(self, credentialId, authorizerAccountId=None):
+        """
+            :description: *Use this operation to change the state of a disabled credential to Enabled. When you Enable a credential, VIP Service Web Services check the validity of the credential ID and return a response. If the enable operation is successful, the credential changes from Disabled to Enabled and is ready for use.*
+            :param credentialId: The token ID (credential ID) identifies the credential to the VIP Service Web Services.
+            :type credentialId: string
+            :param authorizerAccountId: an optional element that can be included with any operation. The AuthorizerAccountId element is used by a parent account (such as a reseller) to send operations on behalf of a child account (such as a customer). The element contains a unique jurisdiction identifier for the child account (the jurisdiction identifier is available from the VIP Manager). The parent account uses its own certificate in the operation request to authenticate the request to VIP Authentication Service.
+            :type authorizerAccountId: string
+            :returns:  the return SOAP response.
+            :raises:
+
+        """
         id = self.client.factory.create("ns0:TokenIdType")
         id.value = credentialId
         id._type = "SMS"
@@ -82,6 +116,18 @@ class SymantecLegacyServices:
         return res
 
     def disableCredentialSMS(self, credentialId, reason=None, authorizerAccountId=None):
+        """
+            :description: *Use the DisableToken API to disable a credential. When you disable a token, you can also specify the reason you disabled it. This information is used in part to provide network-wide intelligence information for the token.*
+            :param credentialId: The token ID (credential ID) identifies the credential to the VIP Service Web Services.
+            :type credentialId: string
+            :param reason: To specify the reason for deactivating the token.
+            :type reason: string
+            :param authorizerAccountId: an optional element that can be included with any operation. The AuthorizerAccountId element is used by a parent account (such as a reseller) to send operations on behalf of a child account (such as a customer). The element contains a unique jurisdiction identifier for the child account (the jurisdiction identifier is available from the VIP Manager). The parent account uses its own certificate in the operation request to authenticate the request to VIP Authentication Service.
+            :type authorizerAccountId: string
+            :returns:  the return SOAP response.
+            :raises:
+
+        """
         id = self.client.factory.create("ns0:TokenIdType")
         id.value = credentialId
         id._type = "SMS"
@@ -90,6 +136,16 @@ class SymantecLegacyServices:
         return self.response
 
     def registerSMSCredential(self, credentialId, DeliverOTP=None):
+        """
+            :description: *Registers a credential for usages in VIP through SMS*
+            :param credentialId: The token ID (credential ID) identifies the credential to the VIP Service Web Services.
+            :type credentialId: string
+            :param DeliverOTP: One time password that is sent as confirmation for registering the credential
+            :type DeliverOTP: string
+            :returns:  the return SOAP response.
+            :raises:
+
+        """
         id = self.provision_client.factory.create("TokenIdType")
         id.value = credentialId
         id._type = "SMS"
@@ -99,6 +155,20 @@ class SymantecLegacyServices:
         return res
 
     def activateCredentialSMS(self, credentialId, otp1=None, otp2=None, authorizerAccountId=None):
+        """
+            :description: *Use the ActivateToken API to activate new or inactive credentials. If the activation is successful, the credential is Enabled and ready for use.*
+            :param credentialId: The token ID (credential ID) identifies the credential to the VIP Service Web Services.
+            :type credentialId: string
+            :param otp1: One-time passwords (OTPs) are security codes generated using the credential. Optionally, send either none, one, or two consecutive security codes. The VIP Service Web Services check any security codes against the credential ID to verify the validity of the credential.
+            :type otp1: string
+            :param otp2: One-time passwords (OTPs) are security codes generated using the credential. Optionally, send either none, one, or two consecutive security codes. The VIP Service Web Services check any security codes against the credential ID to verify the validity of the credential.
+            :type otp2: string
+            :param authorizerAccountId: an optional element that can be included with any operation. The AuthorizerAccountId element is used by a parent account (such as a reseller) to send operations on behalf of a child account (such as a customer). The element contains a unique jurisdiction identifier for the child account (the jurisdiction identifier is available from the VIP Manager). The parent account uses its own certificate in the operation request to authenticate the request to VIP Authentication Service.
+            :type authorizerAccountId: string
+            :returns:  the return SOAP response.
+            :raises:
+
+        """
         id = self.client.factory.create("ns0:TokenIdType")
         id.value = credentialId
         id._type = "SMS"
@@ -108,6 +178,18 @@ class SymantecLegacyServices:
         return self.response
 
     def deactivateCredentialSMS(self, credentialId, reason=None, authorizerAccountId=None):
+        """
+            :description: *Use the DeactivateToken API to deactivate credentials. If you no longer want to allow a credential to be used on your website, deactivate it by setting it to the Inactive state.*
+            :param credentialId: The token ID (credential ID) identifies the credential to the VIP Service Web Services.
+            :type credentialId: string
+            :param reason: To specify the reason for deactivating the token.
+            :type reason: string
+            :param authorizerAccountId: an optional element that can be included with any operation. The AuthorizerAccountId element is used by a parent account (such as a reseller) to send operations on behalf of a child account (such as a customer). The element contains a unique jurisdiction identifier for the child account (the jurisdiction identifier is available from the VIP Manager). The parent account uses its own certificate in the operation request to authenticate the request to VIP Authentication Service.
+            :type authorizerAccountId: string
+            :returns:  the return SOAP response.
+            :raises:
+
+        """
         id = self.client.factory.create("ns0:TokenIdType")
         id.value = credentialId
         id._type = "SMS"
