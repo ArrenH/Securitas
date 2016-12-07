@@ -8,7 +8,7 @@ setup(
     author = 'Allen Huynh, Gabriel Morcote, Hanlin Ye',
     author_email = '',
     url = 'https://github.com/ArrenH/Securitas',
-    download_url = 'https://github.com/ArrenH/Securitas.git',
+    download_url = 'https://github.com/ArrenH/Securitas/archive/v1.0.tar.gz',
     keywords = ['Symantec', 'VIP', 'Python', 'SOAP', 'Validation and Identity Protection', '2FA', 'two factor authentication'],
     classifiers = [],
 )
