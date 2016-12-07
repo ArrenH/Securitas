@@ -4,8 +4,6 @@ Securitas is a Python library for integrating Symantec VIP two factor authentica
 
 ## Installation
 
-< Temporary, could be wrong, need to test! >
-
 Install:
 
     $ pip install securitas
